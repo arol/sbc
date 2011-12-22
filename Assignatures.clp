@@ -792,7 +792,7 @@ Carreguem la ontologia
      TRUE
      (bind $?temes (create$))
      (format t "- %s" ?tema:nom-tema)
-     $?temes(insert$ $?temes 1 ?tema)
+     (bind $?temes (insert$ $?temes 1 ?tema))
 	   (printout t "" crlf)
   )
   (bind ?temes (pregunta-conjunto "Quins temes t'interesen" $?temes))
