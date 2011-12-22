@@ -671,7 +671,6 @@ Carreguem la ontologia
     (multislot temes)
     (slot perfil)
     (slot dificultat-acceptable)
-    (slot usuari)
 )
 
 ;facts inicials
@@ -681,11 +680,11 @@ Carreguem la ontologia
     (nom-usuari desconegut)
     (num-assigs desconegut)
     (maxim-dedicacio desconegut)
+    (maxim-laboratori desconegut)
     (tipus-horari desconegut)
     (temes desconegut)
     (perfil desconegut)
     (dificultat-acceptable desconegut)
-    (usuari desconegut)
   )
 )
 
@@ -698,15 +697,20 @@ Carreguem la ontologia
 
 (deffunction pregunta-conjunto (?pregunta $?valors)
     ;per cada valor a valors
-    (progn$ (?var ?valors) (lowcase ?var))
+    (bind $?valorsLow (create$))
+    (progn$ 
+      (?var ?valors) 
+      (bind $?valorsLow (insert$ $?valorsLow 1 (str-cat (lowcase ?var) "")))
+    )
     ;escrivim per pantalla
-    (format t "%s (%s) " ?pregunta (implode$ ?valors))
+    (format t "%s (%s) " ?pregunta (implode$ $?valorsLow))
     ;llegim de l'entrada
-    (bind ?resp (read))
+    (bind ?resp (readline))
+    (format t "%s " ?resp)
     ;mentre no tinguem resposta
-    (while (not (and (symbolp ?resp) (member (lowcase ?resp) ?valors))) do
-        (format t "%s (%s) " ?pregunta (implode$ ?valors))
-        (bind ?resp (read))
+    (while (not (member (str-cat (lowcase ?resp) "") $?valorsLow )) do
+        (format t "%s (%s) " ?pregunta (implode$ $?valorsLow))
+        (bind ?resp (readline))
     )
 
     ?resp
@@ -723,9 +727,11 @@ Carreguem la ontologia
     ;llegim de l'entrada
 	(bind $?temes (create$))
 	
-	(bind ?resp (read))
-	(printout t (member$ (lowcase ?resp) $?valorsLow) crlf)
-	(if (member$ (lowcase ?resp) $?valorsLow) then
+	(bind ?resp (readline))
+
+	(printout t (member$  (str-cat (lowcase ?resp) "") $?valorsLow) crlf)
+
+	(if (member$ (str-cat (lowcase ?resp) "")  $?valorsLow) then
 		(printout t "holaaaaa" crlf)
 		(bind $?temes (insert$ $?temes 1 ?resp))
 	)
@@ -733,10 +739,9 @@ Carreguem la ontologia
 	;mentre no se'ns indigui el final
 	(while (not (eq (str-compare ?resp "fi") 0)) do
         (format t "%s " ?pregunta )
-        (bind ?resp (read))
+        (bind ?resp (readline))
 		(printout t (lowcase ?resp) crlf)
-		(if (member$ (lowcase ?resp) $?valorsLow) then
-			(printout t "holaaaaa" crlf)
+		(if (member$ (str-cat (lowcase ?resp) "")  $?valorsLow) then
 			(bind $?temes (insert$ $?temes 1 ?resp))
 		)
     )
@@ -764,43 +769,54 @@ Carreguem la ontologia
     (export ?ALL)
 )
 ;pregunta del nom d'usuari
-(defrule demana-nom 
-  ?u <- (alumne-actual (nom desconegut))
-  =>
-  (bind ?nom (pregunta "Com et dius?"))
-  (modify ?u (nom ?nom))
-)
 (defrule demana-nom-usuari 
+  (declare (salience 19))
   ?u <- (alumne-actual (nom-usuari desconegut))
   =>
   (bind ?nomUsuari (pregunta "Necessitem el teu nom d'usuari de la fib. (exemple: john.doe)"))
   (modify ?u (nom-usuari ?nomUsuari))
 )
+(defrule demana-preferencies 
+  (declare (salience 10))
+  =>
+  (bind ?resposta (pregunta-conjunto "Vols escollir preferencies?" si no))
+  (if (eq (str-compare ?resposta si) 0) then
+    (assert (preferencies si))
+  )
+  (if (eq (str-compare ?resposta no) 0) then
+    (focus cutre-salsitxero)
+  )
+)
 (defrule demana-num-assigs 
+  (preferencies si)
   ?u <- (alumne-actual (num-assigs desconegut))
   =>
   (bind ?MaxNumAssigs (pregunta "Digues el número maxim d'assignatures de les que et vols matricular?"))
   (modify ?u (num-assigs ?MaxNumAssigs))
 )
 (defrule demana-max-dedicacio 
+  (preferencies si)
   ?u <- (alumne-actual (maxim-dedicacio desconegut))
   =>
   (bind ?maxHores (pregunta "Quantes hores li vols dedicar a la uni? (setmanals)"))
   (modify ?u (maxim-dedicacio ?maxHores))
 )
 (defrule demana-max-laboratori 
+  (preferencies si)
   ?u <- (alumne-actual (maxim-laboratori desconegut))
   =>
   (bind ?maxHoresLabo (pregunta "Quantes hores de laboratori li vols dedicar a la uni (setmanals)?"))
   (modify ?u (maxim-laboratori ?maxHoresLabo))
 )
 (defrule demana-tipus-horari
+  (preferencies si)
   ?u <- (alumne-actual (tipus-horari desconegut))
   =>
   (bind ?horari (pregunta-conjunto "Quan vols assistir a clase?" mati tarda))
   (modify ?u (tipus-horari ?horari))
 )
 (defrule demana-temes
+  (preferencies si)
   ?u <- (alumne-actual (temes desconegut))
   =>
   (bind $?temes (create$))
@@ -814,4 +830,37 @@ Carreguem la ontologia
   (bind $?temes (pregunta-multi-conjunto "Quins temes t'interesen" $?temes))
   (printout t $?temes crlf)
 	(modify ?u (temes $?temes))
+)
+(defrule demana-perfil-interesat
+  (preferencies si)
+  ?u <- (alumne-actual (perfil desconegut))
+  =>
+  (bind $?perfils (create$))
+  (do-for-all-instances 
+     ((?perfil Perfil))
+     TRUE
+     (format t "- %s" ?perfil:nom-perfil)
+     (bind $?perfils (insert$ $?perfils 1 ?perfil:nom-perfil))
+	 (printout t "" crlf)
+  )
+  (bind ?perfil (pregunta-conjunto "En quin perfil et vols especialitzar?" $?perfils))
+  (printout t ?perfils crlf)
+	(modify ?u (perfil ?perfil))
+)
+(defrule demana-dificultat-maxima
+  (preferencies si)
+  ?u <- (alumne-actual (dificultat-acceptable desconegut))
+  =>
+  (bind ?dificultat (pregunta-conjunto "Quina sera la dificultat maxima de les teves assignatures" facil mitjana dificil))
+  (modify ?u (dificultat-acceptable ?dificultat))
+)
+
+;llavors el fem servir al agafar les dades:
+(defmodule cutre-salsitxero "modul que pregunta les dades a l'usuari"
+    (import MAIN ?ALL)
+    (export ?ALL)
+)
+(defrule patapum 
+  =>
+  (bind ?MaxNumAssigs (pregunta "asodasjdajsdl"))
 )
