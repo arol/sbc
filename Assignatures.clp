@@ -132,9 +132,10 @@
 (defrule demana-temes
   ?u <- (alumne-actual (temes desconegut))
   =>
-  do-for-all-instances (
-    (Tema ?tema) 
-    (format t "%s" ?tema)
+  (do-for-all-instances 
+     ((?tema Temes))
+     TRUE
+	   (printout t "+------------------------------------------------+" crlf)
   )
   (bind ?temes (pregunta-multi-conjunto "Quins temes t'interesen" ))
   (modify ?u (tipus-horari ?temes))
