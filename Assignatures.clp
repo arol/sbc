@@ -19,10 +19,7 @@
     (nom-usuari desconegut)
   )
 )
-;modul d'interaccio amb l'usuari
-(defmodule modul-preguntes "Modul d'interaccio amb l'usuari per tal d'introduir les dades" 
-    (export ?ALL)
-)
+
 
 (deffunction pregunta (?pregunta)
     (format t "%s " ?pregunta)
@@ -41,17 +38,35 @@
 ;    ?resp
 ;)
 
+
+(defrule presentacio "Regla inicial de presentacio"
+	(declare (salience 20))
+	=>
+	(printout t crlf)
+	(printout t "+------------------------------------------------+" crlf)
+	(printout t "|                                                |" crlf)
+	(printout t "|            A S S I G N A T U R E S             |" crlf)
+	(printout t "|                                                |" crlf)
+	(printout t "+------------------------------------------------+" crlf)
+	(focus obtener-datos-usuario)
+)
+
+
 ;llavors el fem servir al agafar les dades:
 (defmodule obtener-datos-usuario "modulo para realizar las preguntas al usuario o seleccionar uno ya existente"
     (import MAIN ?ALL)
-    (import modul-preguntes ?ALL)
     (export ?ALL)
 )
-
 ;pregunta del nom d'usuari
 (defrule demana-nom 
   ?u <- (alumne-actual (nom desconegut))
-    =>
-  (bind ?nom (pregunta "Com et dius pute"))
+  =>
+  (bind ?nom (pregunta "Com et dius?"))
   (modify ?u (nom ?nom))
+)
+(defrule demana-nom-usuari 
+  ?u <- (alumne-actual (nom-usuari desconegut))
+  =>
+  (bind ?nomUsuari (pregunta "Necessitem el teu nom d'usuari de la fib. (exemple: john.doe)"))
+  (modify ?u (nom-usuari ?nomUsuari))
 )
