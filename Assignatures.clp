@@ -6,6 +6,19 @@
     (export ?ALL) 
 )
 
+;template de les dades d'usuari
+(deftemplate alumne-actual 
+    (slot nom)
+    (slot nom-usuari)
+)
+
+;facts inicials
+(deffacts usuari-actual 
+ (alumne-actual 
+    (nom desconegut)
+    (nom-usuari desconegut)
+  )
+)
 ;modul d'interaccio amb l'usuari
 (defmodule modul-preguntes "Modul d'interaccio amb l'usuari per tal d'introduir les dades" 
     (export ?ALL)
@@ -33,4 +46,12 @@
     (import MAIN ?ALL)
     (import modul-preguntes ?ALL)
     (export ?ALL)
+)
+
+;pregunta del nom d'usuari
+(defrule demana-nom 
+  ?u <- (alumne-actual (nom desconegut))
+    =>
+  (bind ?nom (pregunta "Com et dius pute"))
+  (modify ?u (nom ?nom))
 )
