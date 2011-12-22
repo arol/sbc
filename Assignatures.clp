@@ -717,14 +717,19 @@ Carreguem la ontologia
     ;escrivim per pantalla
     (format t "%s (%s) " ?pregunta (implode$ ?valors))
     ;llegim de l'entrada
-    (bind ?resp (read))
+	(if (member (lowcase ?resp) ?valors) then
+		(bind ?resp (read))
+	)
     ;mentre no tinguem resposta
-    (while (not (and (symbolp ?resp) (member (lowcase ?resp) fi))) do
+	;mentre no se'ns indigui el final
+	(while (not (eq (str-compare ?resp "fi") 0)) do
         (format t "%s (%s) " ?pregunta (implode$ ?valors))
-        (bind ?resp (read))
+        (if (member (lowcase ?resp) ?valors) then
+			(bind ?resp (read))
+		)
     )
 
-    ?resp
+	?resp
 )
 
 
