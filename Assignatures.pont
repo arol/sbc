@@ -1,0 +1,321 @@
+; Tue Dec 20 11:39:56 CET 2011
+; 
+;+ (version "3.4.7")
+;+ (build "Build 620")
+
+
+(defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
+	(is-a USER)
+	(role abstract)
+	(single-slot tema
+		(type INSTANCE)
+;+		(allowed-classes Tema)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot nom-tema
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot nom
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot dificultat-acceptable
+		(type SYMBOL)
+		(allowed-values alta mitja baixa)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot assignatura
+		(type INSTANCE)
+;+		(allowed-classes Assignatura)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot convocatories
+		(type INSTANCE)
+;+		(allowed-classes Convocatoria)
+		(create-accessor read-write))
+	(single-slot expedient
+		(type INSTANCE)
+;+		(allowed-classes Expedient)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot tipus
+		(type SYMBOL)
+		(allowed-values obligatoria optativa ale)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot maxim-hores
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot quadrimestre
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot afins
+		(type INSTANCE)
+;+		(allowed-classes Tema)
+		(create-accessor read-write))
+	(single-slot horari
+		(type SYMBOL)
+		(allowed-values mati tarda mati-tarda)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot sigles
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot qualificacio
+		(type FLOAT)
+		(range 0.0 10.0)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot num-matriculats
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot nom-usuari
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot nom-alumne
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot maxim-assignatures
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot temes
+		(type INSTANCE)
+;+		(allowed-classes Tema)
+		(create-accessor read-write))
+	(single-slot projecte
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot hores-laboratori
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot hores-dedicacio
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot maxim-hores-lab
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot horari-convocatoria
+		(type SYMBOL)
+		(allowed-values mati tarda)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot perfil
+		(type INSTANCE)
+;+		(allowed-classes Perfil)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot numero-convocatoria
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot prerequisits
+		(type INSTANCE)
+;+		(allowed-classes Assignatura)
+		(create-accessor read-write))
+	(single-slot curs
+		(type INTEGER)
+		(range 1 5)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot hores-teoria
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot nom-perfil
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot percentatge-aprovats
+		(type INTEGER)
+		(range 0 100)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Assignatura
+	(is-a USER)
+	(role concrete)
+	(single-slot tema
+		(type INSTANCE)
+;+		(allowed-classes Tema)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot tipus
+		(type SYMBOL)
+		(allowed-values obligatoria optativa ale)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot prerequisits
+		(type INSTANCE)
+;+		(allowed-classes Assignatura)
+		(create-accessor read-write))
+	(single-slot curs
+		(type INTEGER)
+		(range 1 5)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot projecte
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot horari
+		(type SYMBOL)
+		(allowed-values mati tarda mati-tarda)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot sigles
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot hores-laboratori
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot hores-teoria
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot nom
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot percentatge-aprovats
+		(type INTEGER)
+		(range 0 100)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot hores-dedicacio
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot num-matriculats
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Expedient
+	(is-a USER)
+	(role concrete)
+	(multislot convocatories
+		(type INSTANCE)
+;+		(allowed-classes Convocatoria)
+		(create-accessor read-write)))
+
+(defclass Convocatoria
+	(is-a USER)
+	(role concrete)
+	(single-slot horari-convocatoria
+		(type SYMBOL)
+		(allowed-values mati tarda)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot qualificacio
+		(type FLOAT)
+		(range 0.0 10.0)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot numero-convocatoria
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot quadrimestre
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot assignatura
+		(type INSTANCE)
+;+		(allowed-classes Assignatura)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Alumne
+	(is-a USER)
+	(role concrete)
+	(single-slot maxim-hores-lab
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot perfil
+		(type INSTANCE)
+;+		(allowed-classes Perfil)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot nom-usuari
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot expedient
+		(type INSTANCE)
+;+		(allowed-classes Expedient)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot dificultat-acceptable
+		(type SYMBOL)
+		(allowed-values alta mitja baixa)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot nom-alumne
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot maxim-assignatures
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot maxim-hores
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot temes
+		(type INSTANCE)
+;+		(allowed-classes Tema)
+		(create-accessor read-write)))
+
+(defclass Tema
+	(is-a USER)
+	(role abstract)
+	(single-slot nom-tema
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass General
+	(is-a Tema)
+	(role concrete))
+
+(defclass Especialitzat
+	(is-a Tema)
+	(role concrete)
+	(multislot afins
+		(type INSTANCE)
+;+		(allowed-classes Tema)
+		(create-accessor read-write)))
+
+(defclass No-informatics
+	(is-a Tema)
+	(role concrete))
+
+(defclass Perfil
+	(is-a USER)
+	(role concrete)
+	(single-slot nom-perfil
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot temes
+		(type INSTANCE)
+;+		(allowed-classes Tema)
+		(create-accessor read-write)))
