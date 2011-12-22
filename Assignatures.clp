@@ -786,11 +786,15 @@ Carreguem la ontologia
 (defrule demana-temes
   ?u <- (alumne-actual (temes desconegut))
   =>
+  
   (do-for-all-instances 
-     ((?tema Temes))
+     ((?tema Tema))
      TRUE
-	   (printout t "+------------------------------------------------+" crlf)
+     (bind $?temes (create$))
+     (format t "- %s" ?tema:nom-tema)
+     $?temes(insert$ $?temes 1 ?tema)
+	   (printout t "" crlf)
   )
-  (bind ?temes (pregunta-multi-conjunto "Quins temes t'interesen" ))
-  (modify ?u (tipus-horari ?temes))
+  (bind ?temes (pregunta-conjunto "Quins temes t'interesen" $?temes))
+  (modify ?u (temes ?temes))
 )
