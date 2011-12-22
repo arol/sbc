@@ -390,7 +390,7 @@ Carreguem la ontologia
 
 ([Assignatures_Class10011] of  Alumne
 
-	(expedient [Assignatures_Class10032])
+	(expedient [MAIN::Assignatures_Class10032])
 	(nom-alumne "Arol Vinolas")
 	(nom-usuari "harold.vinolas"))
 
@@ -590,7 +590,7 @@ Carreguem la ontologia
 	(quadrimestre "2010-1")
 	(qualificacio 0.0))
 
-([Assignatures_Class10032] of  Expedient
+([MAIN::Assignatures_Class10032] of  Expedient
 
 	(convocatories
 		[Assignatures_Class10008]
@@ -784,7 +784,7 @@ Carreguem la ontologia
     (assert (preferencies si))
   )
   (if (eq (str-compare ?resposta no) 0) then
-    (focus cutre-salsitxero)
+    (focus inferencia)
   )
 )
 (defrule demana-num-assigs 
@@ -856,11 +856,23 @@ Carreguem la ontologia
 )
 
 ;llavors el fem servir al agafar les dades:
-(defmodule cutre-salsitxero "modul que pregunta les dades a l'usuari"
+(defmodule inferencia "modul que pregunta les dades a l'usuari"
     (import MAIN ?ALL)
     (export ?ALL)
 )
-(defrule patapum 
+(defrule aconseguir-llista-assignatures-cursades 
+  (alumne-actual (nom-usuari ?nomUsuari))
+	?alumne <- (object (is-a Alumne)(nom-usuari ?nomUsuari))
   =>
+  (printout t "" crlf)
+  (printout t "Molt be, ")
+  (printout t ?alumne crlf)
+  (printout t (send ?alumne get-nom-alumne) )
+  (printout t ". Anem per feina!" crlf)
+
+  (bind ?expedient (send ?alumne get-expedient))
+  (printout t ?expedient crlf )
+  (bind $?convocatories (send ?expedient get-convocatories))
+  (printout t $?convocatories crlf )
   (bind ?MaxNumAssigs (pregunta "asodasjdajsdl"))
-)
+  )
