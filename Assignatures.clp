@@ -715,6 +715,7 @@ Carreguem la ontologia
     ;per cada valor a valors
     (progn$ (?var ?valors) (lowcase ?var))
     ;escrivim per pantalla
+	(printout t ?valors crlf)
     (format t "%s (%s) " ?pregunta (implode$ ?valors))
     ;llegim de l'entrada
 	(if (member (lowcase ?resp) ?valors) then
@@ -800,6 +801,6 @@ Carreguem la ontologia
      $?temes(insert$ $?temes 1 ?tema)
 	   (printout t "" crlf)
   )
-  (bind ?temes (pregunta-conjunto "Quins temes t'interesen" $?temes))
+  (bind ?temes (pregunta-multi-conjunto "Quins temes t'interesen" $?temes))
   (modify ?u (temes ?temes))
 )
