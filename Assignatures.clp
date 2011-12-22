@@ -713,24 +713,35 @@ Carreguem la ontologia
 )
 (deffunction pregunta-multi-conjunto (?pregunta $?valors)
     ;per cada valor a valors
-    (progn$ (?var ?valors) (lowcase ?var))
+	(bind $?valorsLow (create$))
+    (progn$ 
+		(?var ?valors) 
+		(bind $?valorsLow (insert$ $?valorsLow 1 (lowcase ?var)))
+	)
     ;escrivim per pantalla
-	(printout t ?valors crlf)
-    (format t "%s (%s) " ?pregunta (implode$ ?valors))
+    (format t "%s " ?pregunta)
     ;llegim de l'entrada
-	(if (member (lowcase ?resp) ?valors) then
-		(bind ?resp (read))
+	(bind $?temes (create$))
+	
+	(bind ?resp (read))
+	(printout t (member$ (lowcase ?resp) $?valorsLow) crlf)
+	(if (member$ (lowcase ?resp) $?valorsLow) then
+		(printout t "holaaaaa" crlf)
+		(bind $?temes (insert$ $?temes 1 ?resp))
 	)
     ;mentre no tinguem resposta
 	;mentre no se'ns indigui el final
 	(while (not (eq (str-compare ?resp "fi") 0)) do
-        (format t "%s (%s) " ?pregunta (implode$ ?valors))
-        (if (member (lowcase ?resp) ?valors) then
-			(bind ?resp (read))
+        (format t "%s " ?pregunta )
+        (bind ?resp (read))
+		(printout t (lowcase ?resp) crlf)
+		(if (member$ (lowcase ?resp) $?valorsLow) then
+			(printout t "holaaaaa" crlf)
+			(bind $?temes (insert$ $?temes 1 ?resp))
 		)
     )
 
-	?resp
+	$?temes
 )
 
 
@@ -792,15 +803,15 @@ Carreguem la ontologia
 (defrule demana-temes
   ?u <- (alumne-actual (temes desconegut))
   =>
-  
+  (bind $?temes (create$))
   (do-for-all-instances 
      ((?tema Tema))
      TRUE
-     (bind $?temes (create$))
      (format t "- %s" ?tema:nom-tema)
-     (bind $?temes (insert$ $?temes 1 ?tema))
-	   (printout t "" crlf)
+     (bind $?temes (insert$ $?temes 1 ?tema:nom-tema))
+	 (printout t "" crlf)
   )
-  (bind ?temes (pregunta-multi-conjunto "Quins temes t'interesen" $?temes))
-  (modify ?u (temes ?temes))
+  (bind $?temes (pregunta-multi-conjunto "Quins temes t'interesen" $?temes))
+  (printout t $?temes crlf)
+	(modify ?u (temes $?temes))
 )
