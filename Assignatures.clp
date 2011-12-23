@@ -1183,11 +1183,14 @@
 )
 
 (defrule asociar-temes
-    (li-interesa ?perfil)
+    (li-interesa ?tema)
 	=>
     (do-for-all-instances
-       ((?assig Assignatura))
-       TRUE
+        ((?assig Assignatura))
+        TRUE
+
+        (if (eq (str-compare (lowcase ?tema) (lowcase (send(send ?assig get-tema) get-nom-tema) ))0) then
+        )
     )
 )
 
