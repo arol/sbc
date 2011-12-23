@@ -1186,9 +1186,11 @@
     (slot nom (type STRING))
 	(slot sigles (type STRING))
     (slot punts (type INTEGER))
+	(slot volum-feina (type SYMBOL)(allowed-symbols alt mitja baix no-calculat))
 )
 
 (defrule inizialitzar-recomanacions
+	(declare (salience 10))
 	?assignatura <- (object (is-a Assignatura))
 	=>
 	(assert 
@@ -1196,43 +1198,44 @@
 			(nom (send ?assignatura get-nom))
 			(sigles (send ?assignatura get-sigles))
 			(punts 0)
+			(volum-feina no-calculat)
 		)
 	)
 )
 
-(defrule asociar-temes
+(defrule associar-temes
     (li-interesa ?tema)
 	?assignatura <- (object (is-a Assignatura)(nom ?nom))
 	?recomanacio <- (recomanacio (nom ?nom) (punts ?punts))
-    (not (visitat asociar-temes ?nom))
+    (not (visitat associar-temes ?nom))
 	=>
     (if (eq (str-compare (lowcase ?tema) (lowcase (send(send ?assignatura get-tema) get-nom-tema) ))0) then
         (modify ?recomanacio (punts (+ ?punts 1)))
-        (assert (visitat asociar-temes ?nom))
+        (assert (visitat associar-temes ?nom))
     )
 )
 
-(defrule asociar-horari
+(defrule associar-horari
     (horari ?horari) 
 	?assignatura <- (object (is-a Assignatura)(nom ?nom)(horari ?horari|mati-tarda))
 	?recomanacio <- (recomanacio (nom ?nom) (punts ?punts))
-    (not (visitat asociar-horari ?nom))
+    (not (visitat associar-horari ?nom))
 	=>
     ;(if (eq(str-compare (lowcase (send(send ?assignatura get-horari))) "mati-tarda") 0)
     ;    (modify ?recomanacio (punts (+ ?punts 3)))
-    ;    (assert (visitat asociar-horari ?nom))
+    ;    (assert (visitat associar-horari ?nom))
     ; else
     ;    (if (eq (str-compare (lowcase ?tema) (lowcase (send(send ?assignatura get-horari) get-nom-tema) ))0) then
     ;        (modify ?recomanacio (punts (+ ?punts 3)))
-    ;        (assert (visitat asociar-horari ?nom))
+    ;        (assert (visitat associar-horari ?nom))
     ;    )
     ;)
     
     (modify ?recomanacio (punts (+ ?punts 3)))
-    (assert (visitat asociar-horari ?nom))
+    (assert (visitat associar-horari ?nom))
 )
 
-(defrule asociar-dificultat-assumible
+(defrule associar-dificultat-assumible
 	(dificultat-assumible mitja)
 	?assignatura <- (object (is-a Assignatura) (nom ?nom) (dificultat ?dificultat&mitja|baixa))
 	?recomanacio <- (recomanacio (nom ?nom)(punts ?punts))
@@ -1241,3 +1244,82 @@
 	(modify ?recomanacio (punts (+ ?punts 2)))
 	(assert (visitat dificultat-assumible ?nom))
 )
+
+(defrule calcular-volum-feina
+	?recomanacio <- (recomanacio (nom ?nom)(volum-feina no-calculat))
+	?assignatura <- (object (is-a Assignatura) (nom ?nom) 
+						(hores-teoria ?horesteo) (hores-laboratori ?horeslab) (projecte ?proj) )
+	=>
+	(modify ?recomanacio (volum-feina baix))
+	
+	(bind ?volum-feina 0)
+	(if (> ?horeslab 15) then
+		(bind ?volum-feina (+ ?volum-feina 2 ))
+	)
+	(if (> ?horeslab 25) then
+		(bind ?volum-feina (+ ?volum-feina 5 ))
+	)
+	
+	(if (> ?horesteo 30) then
+		(bind ?volum-feina (+ ?volum-feina 2 ))
+	)
+	(if (> ?horesteo 40) then
+		(bind ?volum-feina (+ ?volum-feina 3 ))
+	)
+	
+	(if ?proj then
+		(bind ?volum-feina (+ ?volum-feina 10 ))
+	)
+	
+	(if (> ?volum-feina 10) then
+		(modify ?recomanacio (volum-feina alt))
+	else (if (> ?volum-feina 6) then
+			(modify ?recomanacio (volum-feina mitja))
+		)
+	)
+)
+
+(defrule associar-volum-feina-alt
+	(volum-feina alta )
+	?assignatura <- (object (is-a Assignatura) (nom ?nom))
+	?recomanacio <- (recomanacio (nom ?nom) (volum-feina ?volum-feina) (punts ?punts))
+	(not (visitat associacio-volum-feina ?nom))
+	=>
+	(if (eq ?volum-feina alt) then
+		(modify ?recomanacio (punts (- ?punts 10)))
+	else (if (eq ?volum-feina mitja) then
+			(modify ?recomanacio (punts (- ?punts 5)))
+		)
+	)
+	
+	(assert (visitat associacio-volum-feina ?nom))
+)
+
+(defrule associar-volum-feina-mitja
+	(volum-feina mitja)
+	?assignatura <- (object (is-a Assignatura) (nom ?nom))
+	?recomanacio <- (recomanacio (nom ?nom) (volum-feina ?volum-feina) (punts ?punts))
+	(not (visitat associacio-volum-feina ?nom))
+	=>
+	(if (eq ?volum-feina alt) then
+		(modify ?recomanacio (punts (- ?punts 5)))
+	)
+	
+	(assert (visitat associacio-volum-feina ?nom))
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
