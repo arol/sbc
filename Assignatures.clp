@@ -1,4 +1,4 @@
-; Fri Dec 23 06:17:00 CET 2011
+; Fri Dec 23 16:35:47 CET 2011
 ; 
 ;+ (version "3.4.7")
 ;+ (build "Build 620")
@@ -16,13 +16,13 @@
 		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot nom
-		(type STRING)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(single-slot dificultat-acceptable
 		(type SYMBOL)
 		(allowed-values alta mitja baixa)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot nom
+		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot assignatura
@@ -56,13 +56,13 @@
 		(type INSTANCE)
 ;+		(allowed-classes Tema)
 		(create-accessor read-write))
+	(single-slot sigles
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot horari
 		(type SYMBOL)
 		(allowed-values mati tarda mati-tarda)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot sigles
-		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot qualificacio
@@ -78,12 +78,12 @@
 		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot nom-alumne
-		(type STRING)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(single-slot maxim-assignatures
 		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot nom-alumne
+		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(multislot temes
@@ -107,14 +107,14 @@
 		(type INTEGER)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot horari-convocatoria
-		(type SYMBOL)
-		(allowed-values mati tarda)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(single-slot perfil
 		(type INSTANCE)
 ;+		(allowed-classes Perfil)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot horari-convocatoria
+		(type SYMBOL)
+		(allowed-values mati tarda)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot numero-convocatoria
@@ -133,6 +133,10 @@
 	(single-slot curs
 		(type INTEGER)
 		(range 1 5)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot ects
+		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot hores-teoria
@@ -176,18 +180,22 @@
 		(range 1 5)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
+	(single-slot ects
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot projecte
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
+	(single-slot sigles
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot horari
 		(type SYMBOL)
 		(allowed-values mati tarda mati-tarda)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot sigles
-		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot hores-laboratori
@@ -263,13 +271,13 @@
 ;+		(allowed-classes Perfil)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot nom-usuari
-		(type STRING)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(single-slot expedient
 		(type INSTANCE)
 ;+		(allowed-classes Expedient)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot nom-usuari
+		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot dificultat-acceptable
@@ -277,12 +285,12 @@
 		(allowed-values alta mitja baixa)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot nom-alumne
-		(type STRING)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(single-slot maxim-assignatures
 		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot nom-alumne
+		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot maxim-hores
@@ -333,7 +341,7 @@
 		
 (definstances instancies		
 
-	; Fri Dec 23 06:17:00 CET 2011
+	; Fri Dec 23 16:35:47 CET 2011
 	; 
 	;+ (version "3.4.7")
 	;+ (build "Build 620")
@@ -358,6 +366,7 @@
 
 		(curs 5)
 		(dificultat alta)
+		(ects 6.0)
 		(horari mati-tarda)
 		(hores-laboratori 0)
 		(hores-teoria 32)
@@ -373,6 +382,7 @@
 
 		(curs 4)
 		(dificultat alta)
+		(ects 6.0)
 		(horari tarda)
 		(hores-laboratori 26)
 		(hores-teoria 44)
@@ -432,6 +442,7 @@
 
 		(curs 4)
 		(dificultat mitja)
+		(ects 6.0)
 		(horari tarda)
 		(hores-dedicacio "140")
 		(hores-laboratori 28)
@@ -457,6 +468,7 @@
 
 		(curs 3)
 		(dificultat alta)
+		(ects 6.0)
 		(horari mati-tarda)
 		(hores-dedicacio "143")
 		(hores-laboratori 34)
@@ -472,6 +484,7 @@
 
 		(curs 3)
 		(dificultat baixa)
+		(ects 6.0)
 		(horari mati-tarda)
 		(hores-dedicacio "150")
 		(hores-laboratori 0)
@@ -487,6 +500,7 @@
 
 		(curs 2)
 		(dificultat alta)
+		(ects 6.0)
 		(horari mati-tarda)
 		(hores-dedicacio "140")
 		(hores-laboratori 0)
@@ -506,6 +520,7 @@
 
 		(curs 5)
 		(dificultat alta)
+		(ects 7.2)
 		(horari mati-tarda)
 		(hores-dedicacio "176")
 		(hores-laboratori 14)
@@ -522,6 +537,7 @@
 
 		(curs 3)
 		(dificultat baixa)
+		(ects 7.2)
 		(horari mati-tarda)
 		(hores-dedicacio "172")
 		(hores-laboratori 24)
@@ -537,6 +553,7 @@
 
 		(curs 3)
 		(dificultat mitja)
+		(ects 7.2)
 		(horari mati-tarda)
 		(hores-dedicacio "173")
 		(hores-laboratori 0)
@@ -553,6 +570,7 @@
 
 		(curs 4)
 		(dificultat mitja)
+		(ects 6.0)
 		(horari mati-tarda)
 		(hores-dedicacio "150")
 		(hores-laboratori 57)
@@ -665,6 +683,7 @@
 
 		(curs 3)
 		(dificultat baixa)
+		(ects 6.0)
 		(horari mati)
 		(hores-laboratori 0)
 		(hores-teoria 46)
@@ -694,6 +713,7 @@
 
 		(curs 3)
 		(dificultat mitja)
+		(ects 7.2)
 		(horari mati-tarda)
 		(hores-laboratori 18)
 		(hores-teoria 46)
@@ -708,6 +728,7 @@
 
 		(curs 4)
 		(dificultat mitja)
+		(ects 4.8)
 		(horari mati-tarda)
 		(hores-laboratori 40)
 		(hores-teoria 8)
@@ -726,6 +747,97 @@
 			[MAIN::Assignatures_Class4]
 			[MAIN::Assignatures_Class10005])
 		(nom-tema "Realitat Augmentada"))
+
+	([MAIN::Assignatures_Class30000] of  Alumne
+
+		(nom-alumne "Xavier Perez")
+		(nom-usuari "xavier.perez"))
+
+	([MAIN::Assignatures_Class30002] of  Alumne
+
+		(expedient [MAIN::Assignatures_Class30008])
+		(nom-alumne "David Cortes")
+		(nom-usuari "david.cortes-fulla"))
+
+	([MAIN::Assignatures_Class30003] of  Alumne
+
+		(expedient [MAIN::Assignatures_Class30005])
+		(nom-alumne "Ana Montoliu")
+		(nom-usuari "ana.montoliu"))
+
+	([MAIN::Assignatures_Class30005] of  Expedient
+
+		(convocatories
+			[MAIN::Assignatures_Class30006]
+			[MAIN::Assignatures_Class30007]))
+
+	([MAIN::Assignatures_Class30006] of  Convocatoria
+
+		(assignatura [MAIN::Assignatures_Class10017])
+		(numero-convocatoria 1)
+		(quadrimestre "2009-1")
+		(qualificacio 8.0))
+
+	([MAIN::Assignatures_Class30007] of  Convocatoria
+
+		(assignatura [MAIN::Assignatures_Class10020])
+		(numero-convocatoria 1)
+		(quadrimestre "2009-1")
+		(qualificacio 9.2))
+
+	([MAIN::Assignatures_Class30008] of  Expedient
+
+		(convocatories
+			[MAIN::Assignatures_Class30009]
+			[MAIN::Assignatures_Class30011]))
+
+	([MAIN::Assignatures_Class30009] of  Convocatoria
+
+		(assignatura [MAIN::Assignatures_Class30010])
+		(horari-convocatoria mati)
+		(numero-convocatoria 1)
+		(quadrimestre "2009-1")
+		(qualificacio 10.0))
+
+	([MAIN::Assignatures_Class30010] of  Assignatura
+
+		(curs 3)
+		(ects 7.2)
+		(nom "Enginyeria del software 1")
+		(sigles "ES1"))
+
+	([MAIN::Assignatures_Class30011] of  Convocatoria
+
+		(assignatura [MAIN::Assignatures_Class20004])
+		(horari-convocatoria mati)
+		(numero-convocatoria 1)
+		(quadrimestre "2010-1")
+		(qualificacio 7.0))
+
+	([MAIN::Assignatures_Class30012] of  Expedient
+
+		(convocatories
+			[MAIN::Assignatures_Class30013]
+			[MAIN::Assignatures_Class30014]))
+
+	([MAIN::Assignatures_Class30013] of  Convocatoria
+
+		(assignatura [MAIN::Assignatures_Class10016])
+		(horari-convocatoria mati)
+		(numero-convocatoria 1)
+		(quadrimestre "2011-1")
+		(qualificacio 9.0))
+
+	([MAIN::Assignatures_Class30014] of  Convocatoria
+
+		(assignatura [MAIN::Assignatures_Class10019])
+		(horari-convocatoria mati)
+		(numero-convocatoria 1)
+		(quadrimestre "2011-1")
+		(qualificacio 10.0))
+
+	([MAIN::Assignatures_Class30015] of  Assignatura
+	)
 
 	([MAIN::Assignatures_Class4] of  General
 
