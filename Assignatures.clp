@@ -1,4 +1,4 @@
-; Fri Dec 23 02:03:40 CET 2011
+; Fri Dec 23 06:17:00 CET 2011
 ; 
 ;+ (version "3.4.7")
 ;+ (build "Build 620")
@@ -16,13 +16,13 @@
 		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
+	(single-slot nom
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot dificultat-acceptable
 		(type SYMBOL)
 		(allowed-values alta mitja baixa)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot nom
-		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot assignatura
@@ -56,13 +56,13 @@
 		(type INSTANCE)
 ;+		(allowed-classes Tema)
 		(create-accessor read-write))
-	(single-slot sigles
-		(type STRING)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(single-slot horari
 		(type SYMBOL)
 		(allowed-values mati tarda mati-tarda)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot sigles
+		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot qualificacio
@@ -78,12 +78,12 @@
 		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot maxim-assignatures
-		(type INTEGER)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(single-slot nom-alumne
 		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot maxim-assignatures
+		(type INTEGER)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(multislot temes
@@ -107,18 +107,23 @@
 		(type INTEGER)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot perfil
-		(type INSTANCE)
-;+		(allowed-classes Perfil)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(single-slot horari-convocatoria
 		(type SYMBOL)
 		(allowed-values mati tarda)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
+	(single-slot perfil
+		(type INSTANCE)
+;+		(allowed-classes Perfil)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot numero-convocatoria
 		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot dificultat
+		(type SYMBOL)
+		(allowed-values alta mitja baixa)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(multislot prerequisits
@@ -157,6 +162,11 @@
 		(allowed-values obligatoria optativa ale)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
+	(single-slot dificultat
+		(type SYMBOL)
+		(allowed-values alta mitja baixa)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(multislot prerequisits
 		(type INSTANCE)
 ;+		(allowed-classes Assignatura)
@@ -171,13 +181,13 @@
 		(allowed-values FALSE TRUE)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot sigles
-		(type STRING)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(single-slot horari
 		(type SYMBOL)
 		(allowed-values mati tarda mati-tarda)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot sigles
+		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot hores-laboratori
@@ -253,13 +263,13 @@
 ;+		(allowed-classes Perfil)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
+	(single-slot nom-usuari
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot expedient
 		(type INSTANCE)
 ;+		(allowed-classes Expedient)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot nom-usuari
-		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot dificultat-acceptable
@@ -267,12 +277,12 @@
 		(allowed-values alta mitja baixa)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot maxim-assignatures
-		(type INTEGER)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(single-slot nom-alumne
 		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot maxim-assignatures
+		(type INTEGER)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot maxim-hores
@@ -323,350 +333,420 @@
 		
 (definstances instancies		
 
-		; Fri Dec 23 02:05:51 CET 2011
-		; 
-		;+ (version "3.4.7")
-		;+ (build "Build 620")
-
-		([MAIN::Assignatures_Class0] of  Especialitzat
-
-			(afins
-				[MAIN::Assignatures_Class4]
-				[MAIN::Assignatures_Class1])
-			(nom-tema "Bases de Dades"))
-
-		([MAIN::Assignatures_Class1] of  General
-
-			(nom-tema "Enginyeria del Software"))
-
-		([MAIN::Assignatures_Class10] of  Especialitzat
-
-			(afins [MAIN::Assignatures_Class1])
-			(nom-tema "Intel·ligencia Artificial"))
+	; Fri Dec 23 06:17:00 CET 2011
+	; 
+	;+ (version "3.4.7")
+	;+ (build "Build 620")
+
+	([MAIN::Assignatures_Class0] of  Especialitzat
+
+		(afins
+			[MAIN::Assignatures_Class4]
+			[MAIN::Assignatures_Class1])
+		(nom-tema "Bases de Dades"))
+
+	([MAIN::Assignatures_Class1] of  General
+
+		(nom-tema "Enginyeria del Software"))
+
+	([MAIN::Assignatures_Class10] of  Especialitzat
+
+		(afins [MAIN::Assignatures_Class1])
+		(nom-tema "Intel·ligencia Artificial"))
+
+	([MAIN::Assignatures_Class10000] of  Assignatura
+
+		(curs 5)
+		(dificultat alta)
+		(horari mati-tarda)
+		(hores-laboratori 0)
+		(hores-teoria 32)
+		(nom "Sistemes de gestio de bases de dades i dobjectes")
+		(num-matriculats 20)
+		(percentatge-aprovats 90)
+		(prerequisits [MAIN::Assignatures_Class10001])
+		(sigles "SGBDO")
+		(tema [MAIN::Assignatures_Class0])
+		(tipus optativa))
+
+	([MAIN::Assignatures_Class10001] of  Assignatura
+
+		(curs 4)
+		(dificultat alta)
+		(horari tarda)
+		(hores-laboratori 26)
+		(hores-teoria 44)
+		(nom "Disseny i administracio de bases de dades")
+		(num-matriculats 60)
+		(percentatge-aprovats 80)
+		(prerequisits [MAIN::Assignatures_Class10020])
+		(sigles "DABD")
+		(tema [MAIN::Assignatures_Class0])
+		(tipus optativa))
+
+	([MAIN::Assignatures_Class10004] of  Perfil
+
+		(nom-perfil "Representacio grafica")
+		(temes
+			[MAIN::Assignatures_Class10005]
+			[MAIN::Assignatures_Class4]
+			[MAIN::Assignatures_Class5]
+			[MAIN::Assignatures_Class3]))
+
+	([MAIN::Assignatures_Class10005] of  General
+
+		(nom-tema "Visualitzacio"))
+
+	([MAIN::Assignatures_Class10006] of  Especialitzat
+
+		(afins
+			[MAIN::Assignatures_Class1]
+			[MAIN::Assignatures_Class2]
+			[MAIN::Assignatures_Class0])
+		(nom-tema "Sistemes Informacio"))
+
+	([MAIN::Assignatures_Class10007] of  Perfil
+
+		(nom-perfil "Gestio empresarial")
+		(temes
+			[MAIN::Assignatures_Class1]
+			[MAIN::Assignatures_Class10006]
+			[MAIN::Assignatures_Class2]
+			[MAIN::Assignatures_Class7]))
+
+	([MAIN::Assignatures_Class10008] of  Convocatoria
+
+		(assignatura [MAIN::Assignatures_Class10017])
+		(horari-convocatoria mati)
+		(numero-convocatoria 1)
+		(quadrimestre "2006-1")
+		(qualificacio 4.5))
+
+	([MAIN::Assignatures_Class10011] of  Alumne
+
+		(expedient [MAIN::Assignatures_Class10032])
+		(nom-alumne "Arol Vinolas")
+		(nom-usuari "harold.vinolas"))
+
+	([MAIN::Assignatures_Class10012] of  Assignatura
+
+		(curs 4)
+		(dificultat mitja)
+		(horari tarda)
+		(hores-dedicacio "140")
+		(hores-laboratori 28)
+		(hores-teoria 42)
+		(nom "Visualitzacio Avancada")
+		(num-matriculats 100)
+		(percentatge-aprovats 85)
+		(prerequisits [MAIN::Assignatures_Class10015])
+		(sigles "VA")
+		(tema [MAIN::Assignatures_Class3])
+		(tipus optativa))
+
+	([MAIN::Assignatures_Class10013] of  General
+
+		(nom-tema "Arquitectura"))
+
+	([MAIN::Assignatures_Class10014] of  Especialitzat
+
+		(afins [MAIN::Assignatures_Class10013])
+		(nom-tema "Eficiencia"))
+
+	([MAIN::Assignatures_Class10015] of  Assignatura
+
+		(curs 3)
+		(dificultat alta)
+		(horari mati-tarda)
+		(hores-dedicacio "143")
+		(hores-laboratori 34)
+		(hores-teoria 42)
+		(nom "Visualitzacio i Interaccio Grafica")
+		(num-matriculats 350)
+		(percentatge-aprovats 70)
+		(sigles "VIG")
+		(tema [MAIN::Assignatures_Class10005])
+		(tipus obligatoria))
+
+	([MAIN::Assignatures_Class10016] of  Assignatura
+
+		(curs 3)
+		(dificultat baixa)
+		(horari mati-tarda)
+		(hores-dedicacio "150")
+		(hores-laboratori 0)
+		(hores-teoria 45)
+		(nom "Empresa i Entorn Economic")
+		(num-matriculats 250)
+		(percentatge-aprovats 90)
+		(sigles "E3")
+		(tema [MAIN::Assignatures_Class2])
+		(tipus obligatoria))
+
+	([MAIN::Assignatures_Class10017] of  Assignatura
+
+		(curs 2)
+		(dificultat alta)
+		(horari mati-tarda)
+		(hores-dedicacio "140")
+		(hores-laboratori 0)
+		(hores-teoria 70)
+		(nom "Introduccio a la logica")
+		(num-matriculats 100)
+		(percentatge-aprovats 65)
+		(sigles "IL")
+		(tema [MAIN::Assignatures_Class10018])
+		(tipus obligatoria))
+
+	([MAIN::Assignatures_Class10018] of  General
+
+		(nom-tema "Logica"))
+
+	([MAIN::Assignatures_Class10019] of  Assignatura
+
+		(curs 5)
+		(dificultat alta)
+		(horari mati-tarda)
+		(hores-dedicacio "176")
+		(hores-laboratori 14)
+		(hores-teoria 38)
+		(nom "Inteligencia Artificial")
+		(num-matriculats 250)
+		(percentatge-aprovats 80)
+		(prerequisits [MAIN::Assignatures_Class10017])
+		(sigles "IA")
+		(tema [MAIN::Assignatures_Class10])
+		(tipus obligatoria))
+
+	([MAIN::Assignatures_Class10020] of  Assignatura
+
+		(curs 3)
+		(dificultat baixa)
+		(horari mati-tarda)
+		(hores-dedicacio "172")
+		(hores-laboratori 24)
+		(hores-teoria 20)
+		(nom "Bases de Dades")
+		(num-matriculats 200)
+		(percentatge-aprovats 90)
+		(sigles "BD")
+		(tema [MAIN::Assignatures_Class0])
+		(tipus obligatoria))
+
+	([MAIN::Assignatures_Class10021] of  Assignatura
+
+		(curs 3)
+		(dificultat mitja)
+		(horari mati-tarda)
+		(hores-dedicacio "173")
+		(hores-laboratori 0)
+		(hores-teoria 28)
+		(nom "Enginyeria del Software II")
+		(num-matriculats 300)
+		(percentatge-aprovats 85)
+		(prerequisits [MAIN::Assignatures_Class10020])
+		(sigles "ES2")
+		(tema [MAIN::Assignatures_Class1])
+		(tipus obligatoria))
+
+	([MAIN::Assignatures_Class10022] of  Assignatura
+
+		(curs 4)
+		(dificultat mitja)
+		(horari mati-tarda)
+		(hores-dedicacio "150")
+		(hores-laboratori 57)
+		(hores-teoria 14)
+		(nom "Projecte Enginyeria del Software i Bases de Dades")
+		(num-matriculats 200)
+		(percentatge-aprovats 90)
+		(prerequisits
+			[MAIN::Assignatures_Class10020]
+			[MAIN::Assignatures_Class10021])
+		(projecte TRUE)
+		(sigles "PESBD")
+		(tema [MAIN::Assignatures_Class1])
+		(tipus obligatoria))
+
+	([MAIN::Assignatures_Class10023] of  Convocatoria
+
+		(assignatura [MAIN::Assignatures_Class10017])
+		(horari-convocatoria mati)
+		(numero-convocatoria 2)
+		(quadrimestre "2006-2")
+		(qualificacio 5.2))
+
+	([MAIN::Assignatures_Class10024] of  Convocatoria
+
+		(assignatura [MAIN::Assignatures_Class10016])
+		(horari-convocatoria mati)
+		(numero-convocatoria 1)
+		(quadrimestre "2007-2")
+		(qualificacio 7.0))
+
+	([MAIN::Assignatures_Class10025] of  Convocatoria
+
+		(assignatura [MAIN::Assignatures_Class10020])
+		(horari-convocatoria mati)
+		(numero-convocatoria 1)
+		(quadrimestre "2007-1")
+		(qualificacio 5.6))
+
+	([MAIN::Assignatures_Class10026] of  Convocatoria
+
+		(assignatura [MAIN::Assignatures_Class10021])
+		(horari-convocatoria tarda)
+		(numero-convocatoria 1)
+		(quadrimestre "2008-2")
+		(qualificacio 7.5))
+
+	([MAIN::Assignatures_Class10027] of  Convocatoria
+
+		(assignatura [MAIN::Assignatures_Class10022])
+		(horari-convocatoria tarda)
+		(numero-convocatoria 1)
+		(quadrimestre "2009-1")
+		(qualificacio 10.0))
+
+	([MAIN::Assignatures_Class10028] of  Convocatoria
+
+		(assignatura [MAIN::Assignatures_Class10015])
+		(horari-convocatoria tarda)
+		(numero-convocatoria 1)
+		(quadrimestre "2009-1")
+		(qualificacio 3.0))
+
+	([MAIN::Assignatures_Class10029] of  Convocatoria
+
+		(assignatura [MAIN::Assignatures_Class10015])
+		(horari-convocatoria tarda)
+		(numero-convocatoria 2)
+		(quadrimestre "2009-2")
+		(qualificacio 6.0))
+
+	([MAIN::Assignatures_Class10030] of  Convocatoria
+
+		(assignatura [MAIN::Assignatures_Class10012])
+		(horari-convocatoria tarda)
+		(numero-convocatoria 1)
+		(quadrimestre "2010-1")
+		(qualificacio 0.0))
+
+	([MAIN::Assignatures_Class10032] of  Expedient
+
+		(convocatories
+			[MAIN::Assignatures_Class10008]
+			[MAIN::Assignatures_Class10023]
+			[MAIN::Assignatures_Class10025]
+			[MAIN::Assignatures_Class10024]
+			[MAIN::Assignatures_Class10026]
+			[MAIN::Assignatures_Class10027]
+			[MAIN::Assignatures_Class10028]
+			[MAIN::Assignatures_Class10029]
+			[MAIN::Assignatures_Class10030]))
+
+	([MAIN::Assignatures_Class10033] of  Perfil
+
+		(nom-perfil "Enginyeria del Software")
+		(temes
+			[MAIN::Assignatures_Class10006]
+			[MAIN::Assignatures_Class1]))
+
+	([MAIN::Assignatures_Class11] of  Especialitzat
+
+		(afins [MAIN::Assignatures_Class10])
+		(nom-tema "LISP"))
+
+	([MAIN::Assignatures_Class2] of  No-informatics
+
+		(nom-tema "Empresa"))
+
+	([MAIN::Assignatures_Class20000] of  Assignatura
+
+		(curs 3)
+		(dificultat baixa)
+		(horari mati)
+		(hores-laboratori 0)
+		(hores-teoria 46)
+		(nom "Viabilitat de Projectes Empresarials")
+		(num-matriculats 100)
+		(percentatge-aprovats 98)
+		(prerequisits [MAIN::Assignatures_Class10016])
+		(sigles "VPE")
+		(tema [MAIN::Assignatures_Class2])
+		(tipus optativa))
+
+	([MAIN::Assignatures_Class20001] of  Especialitzat
+
+		(afins
+			[MAIN::Assignatures_Class20002]
+			[MAIN::Assignatures_Class10013])
+		(nom-tema "Xarxes"))
+
+	([MAIN::Assignatures_Class20002] of  Especialitzat
+
+		(afins
+			[MAIN::Assignatures_Class20001]
+			[MAIN::Assignatures_Class10013])
+		(nom-tema "Sistemes"))
+
+	([MAIN::Assignatures_Class20003] of  Assignatura
+
+		(curs 3)
+		(dificultat mitja)
+		(horari mati-tarda)
+		(hores-laboratori 18)
+		(hores-teoria 46)
+		(nom "Xarxes de Computadors")
+		(num-matriculats 320)
+		(percentatge-aprovats 85)
+		(sigles "XC")
+		(tema [MAIN::Assignatures_Class20001])
+		(tipus obligatoria))
+
+	([MAIN::Assignatures_Class20004] of  Assignatura
+
+		(curs 4)
+		(dificultat mitja)
+		(horari mati-tarda)
+		(hores-laboratori 40)
+		(hores-teoria 8)
+		(nom "Projecte de Xarxes de Computadors")
+		(num-matriculats 170)
+		(percentatge-aprovats 98)
+		(prerequisits [MAIN::Assignatures_Class20003])
+		(projecte TRUE)
+		(sigles "PXC")
+		(tema [MAIN::Assignatures_Class20001])
+		(tipus obligatoria))
+
+	([MAIN::Assignatures_Class3] of  Especialitzat
+
+		(afins
+			[MAIN::Assignatures_Class4]
+			[MAIN::Assignatures_Class10005])
+		(nom-tema "Realitat Augmentada"))
+
+	([MAIN::Assignatures_Class4] of  General
+
+		(nom-tema "Matematiques"))
+
+	([MAIN::Assignatures_Class5] of  General
+
+		(nom-tema "Fisica"))
+
+	([MAIN::Assignatures_Class7] of  No-informatics
+
+		(nom-tema "Lideratge"))
+
+	([MAIN::Assignatures_Class8] of  No-informatics
+
+		(nom-tema "Ludic"))
+
+	([MAIN::Assignatures_Class9] of  Especialitzat
+
+		(nom-tema "Android"))
 
-		([MAIN::Assignatures_Class10000] of  Assignatura
-
-			(curs 5)
-			(horari mati-tarda)
-			(hores-laboratori 0)
-			(hores-teoria 32)
-			(nom "Sistemes de gestio de bases de dades i dobjectes")
-			(num-matriculats 20)
-			(percentatge-aprovats 90)
-			(prerequisits [MAIN::Assignatures_Class10001])
-			(sigles "SGBDO")
-			(tema [MAIN::Assignatures_Class0])
-			(tipus optativa))
-
-		([MAIN::Assignatures_Class10001] of  Assignatura
-
-			(curs 4)
-			(horari tarda)
-			(hores-laboratori 26)
-			(hores-teoria 44)
-			(nom "Disseny i administracio de bases de dades")
-			(num-matriculats 60)
-			(percentatge-aprovats 80)
-			(prerequisits [MAIN::Assignatures_Class10020])
-			(sigles "DABD")
-			(tema [MAIN::Assignatures_Class0])
-			(tipus optativa))
-
-		([MAIN::Assignatures_Class10004] of  Perfil
-
-			(nom-perfil "Representacio grafica")
-			(temes
-				[MAIN::Assignatures_Class10005]
-				[MAIN::Assignatures_Class4]
-				[MAIN::Assignatures_Class5]
-				[MAIN::Assignatures_Class3]))
-
-		([MAIN::Assignatures_Class10005] of  General
-
-			(nom-tema "Visualitzacio"))
-
-		([MAIN::Assignatures_Class10006] of  Especialitzat
-
-			(afins
-				[MAIN::Assignatures_Class1]
-				[MAIN::Assignatures_Class2]
-				[MAIN::Assignatures_Class0])
-			(nom-tema "Sistemes Informacio"))
-
-		([MAIN::Assignatures_Class10007] of  Perfil
-
-			(nom-perfil "Gestio empresarial")
-			(temes
-				[MAIN::Assignatures_Class1]
-				[MAIN::Assignatures_Class10006]
-				[MAIN::Assignatures_Class2]
-				[MAIN::Assignatures_Class7]))
-
-		([MAIN::Assignatures_Class10008] of  Convocatoria
-
-			(assignatura [MAIN::Assignatures_Class10017])
-			(horari-convocatoria mati)
-			(numero-convocatoria 1)
-			(quadrimestre "2006-1")
-			(qualificacio 4.5))
-
-		([MAIN::Assignatures_Class10011] of  Alumne
-
-			(expedient [MAIN::Assignatures_Class10032])
-			(nom-alumne "Arol Vinolas")
-			(nom-usuari "harold.vinolas"))
-
-		([MAIN::Assignatures_Class10012] of  Assignatura
-
-			(curs 4)
-			(horari tarda)
-			(hores-dedicacio "140")
-			(hores-laboratori 28)
-			(hores-teoria 42)
-			(nom "Visualitzacio Avancada")
-			(num-matriculats 100)
-			(percentatge-aprovats 85)
-			(prerequisits [MAIN::Assignatures_Class10015])
-			(sigles "VA")
-			(tema [MAIN::Assignatures_Class3])
-			(tipus optativa))
-
-		([MAIN::Assignatures_Class10013] of  General
-
-			(nom-tema "Arquitectura"))
-
-		([MAIN::Assignatures_Class10014] of  Especialitzat
-
-			(afins [MAIN::Assignatures_Class10013])
-			(nom-tema "Eficiencia"))
-
-		([MAIN::Assignatures_Class10015] of  Assignatura
-
-			(curs 3)
-			(horari mati-tarda)
-			(hores-dedicacio "143")
-			(hores-laboratori 34)
-			(hores-teoria 42)
-			(nom "Visualitzacio i Interaccio Grafica")
-			(num-matriculats 350)
-			(percentatge-aprovats 70)
-			(sigles "VIG")
-			(tema [MAIN::Assignatures_Class10005])
-			(tipus obligatoria))
-
-		([MAIN::Assignatures_Class10016] of  Assignatura
-
-			(curs 3)
-			(horari mati-tarda)
-			(hores-dedicacio "150")
-			(hores-laboratori 0)
-			(hores-teoria 45)
-			(nom "Empresa i Entorn Economic")
-			(num-matriculats 250)
-			(percentatge-aprovats 90)
-			(sigles "E3")
-			(tema [MAIN::Assignatures_Class2])
-			(tipus obligatoria))
-
-		([MAIN::Assignatures_Class10017] of  Assignatura
-
-			(curs 2)
-			(horari mati-tarda)
-			(hores-dedicacio "140")
-			(hores-laboratori 0)
-			(hores-teoria 70)
-			(nom "Introduccio a la logica")
-			(num-matriculats 100)
-			(percentatge-aprovats 65)
-			(sigles "IL")
-			(tema [MAIN::Assignatures_Class10018])
-			(tipus obligatoria))
-
-		([MAIN::Assignatures_Class10018] of  General
-
-			(nom-tema "Logica"))
-
-		([MAIN::Assignatures_Class10019] of  Assignatura
-
-			(curs 5)
-			(horari mati-tarda)
-			(hores-dedicacio "176")
-			(hores-laboratori 14)
-			(hores-teoria 38)
-			(nom "Inteligencia Artificial")
-			(num-matriculats 250)
-			(percentatge-aprovats 80)
-			(prerequisits [MAIN::Assignatures_Class10017])
-			(sigles "IA")
-			(tema [MAIN::Assignatures_Class10])
-			(tipus obligatoria))
-
-		([MAIN::Assignatures_Class10020] of  Assignatura
-
-			(curs 3)
-			(horari mati-tarda)
-			(hores-dedicacio "172")
-			(hores-laboratori 24)
-			(hores-teoria 20)
-			(nom "Bases de Dades")
-			(num-matriculats 200)
-			(percentatge-aprovats 90)
-			(sigles "BD")
-			(tema [MAIN::Assignatures_Class0])
-			(tipus obligatoria))
-
-		([MAIN::Assignatures_Class10021] of  Assignatura
-
-			(curs 3)
-			(horari mati-tarda)
-			(hores-dedicacio "173")
-			(hores-laboratori 0)
-			(hores-teoria 28)
-			(nom "Enginyeria del Software II")
-			(num-matriculats 300)
-			(percentatge-aprovats 85)
-			(prerequisits [MAIN::Assignatures_Class10020])
-			(sigles "ES2")
-			(tema [MAIN::Assignatures_Class1])
-			(tipus obligatoria))
-
-		([MAIN::Assignatures_Class10022] of  Assignatura
-
-			(curs 4)
-			(horari mati-tarda)
-			(hores-dedicacio "150")
-			(hores-laboratori 57)
-			(hores-teoria 14)
-			(nom "Projecte Enginyeria del Software i Bases de Dades")
-			(num-matriculats 200)
-			(percentatge-aprovats 90)
-			(prerequisits
-				[MAIN::Assignatures_Class10020]
-				[MAIN::Assignatures_Class10021])
-			(projecte TRUE)
-			(sigles "PESBD")
-			(tema [MAIN::Assignatures_Class1])
-			(tipus obligatoria))
-
-		([MAIN::Assignatures_Class10023] of  Convocatoria
-
-			(assignatura [MAIN::Assignatures_Class10017])
-			(horari-convocatoria mati)
-			(numero-convocatoria 2)
-			(quadrimestre "2006-2")
-			(qualificacio 5.2))
-
-		([MAIN::Assignatures_Class10024] of  Convocatoria
-
-			(assignatura [MAIN::Assignatures_Class10016])
-			(horari-convocatoria mati)
-			(numero-convocatoria 1)
-			(quadrimestre "2007-2")
-			(qualificacio 7.0))
-
-		([MAIN::Assignatures_Class10025] of  Convocatoria
-
-			(assignatura [MAIN::Assignatures_Class10020])
-			(horari-convocatoria mati)
-			(numero-convocatoria 1)
-			(quadrimestre "2007-1")
-			(qualificacio 5.6))
-
-		([MAIN::Assignatures_Class10026] of  Convocatoria
-
-			(assignatura [MAIN::Assignatures_Class10021])
-			(horari-convocatoria tarda)
-			(numero-convocatoria 1)
-			(quadrimestre "2008-2")
-			(qualificacio 7.5))
-
-		([MAIN::Assignatures_Class10027] of  Convocatoria
-
-			(assignatura [MAIN::Assignatures_Class10022])
-			(horari-convocatoria tarda)
-			(numero-convocatoria 1)
-			(quadrimestre "2009-1")
-			(qualificacio 10.0))
-
-		([MAIN::Assignatures_Class10028] of  Convocatoria
-
-			(assignatura [MAIN::Assignatures_Class10015])
-			(horari-convocatoria tarda)
-			(numero-convocatoria 1)
-			(quadrimestre "2009-1")
-			(qualificacio 3.0))
-
-		([MAIN::Assignatures_Class10029] of  Convocatoria
-
-			(assignatura [MAIN::Assignatures_Class10015])
-			(horari-convocatoria tarda)
-			(numero-convocatoria 2)
-			(quadrimestre "2009-2")
-			(qualificacio 6.0))
-
-		([MAIN::Assignatures_Class10030] of  Convocatoria
-
-			(assignatura [MAIN::Assignatures_Class10012])
-			(horari-convocatoria tarda)
-			(numero-convocatoria 1)
-			(quadrimestre "2010-1")
-			(qualificacio 0.0))
-
-		([MAIN::Assignatures_Class10032] of  Expedient
-
-			(convocatories
-				[MAIN::Assignatures_Class10008]
-				[MAIN::Assignatures_Class10023]
-				[MAIN::Assignatures_Class10025]
-				[MAIN::Assignatures_Class10024]
-				[MAIN::Assignatures_Class10026]
-				[MAIN::Assignatures_Class10027]
-				[MAIN::Assignatures_Class10028]
-				[MAIN::Assignatures_Class10029]
-				[MAIN::Assignatures_Class10030]))
-
-		([MAIN::Assignatures_Class10033] of  Perfil
-
-			(nom-perfil "Enginyeria del Software")
-			(temes
-				[MAIN::Assignatures_Class10006]
-				[MAIN::Assignatures_Class1]))
-
-		([MAIN::Assignatures_Class11] of  Especialitzat
-
-			(afins [MAIN::Assignatures_Class10])
-			(nom-tema "LISP"))
-
-		([MAIN::Assignatures_Class2] of  No-informatics
-
-			(nom-tema "Empresa"))
-
-		([MAIN::Assignatures_Class3] of  Especialitzat
-
-			(afins
-				[MAIN::Assignatures_Class4]
-				[MAIN::Assignatures_Class10005])
-			(nom-tema "Realitat Augmentada"))
-
-		([MAIN::Assignatures_Class4] of  General
-
-			(nom-tema "Matematiques"))
-
-		([MAIN::Assignatures_Class5] of  General
-
-			(nom-tema "Fisica"))
-
-		([MAIN::Assignatures_Class7] of  No-informatics
-
-			(nom-tema "Lideratge"))
-
-		([MAIN::Assignatures_Class8] of  No-informatics
-
-			(nom-tema "Ludic"))
-
-		([MAIN::Assignatures_Class9] of  Especialitzat
-
-			(nom-tema "Android"))
 
 )
 

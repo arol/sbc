@@ -1,4 +1,4 @@
-; Fri Dec 23 02:05:51 CET 2011
+; Fri Dec 23 06:17:00 CET 2011
 ; 
 ;+ (version "3.4.7")
 ;+ (build "Build 620")
@@ -16,13 +16,13 @@
 		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
+	(single-slot nom
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot dificultat-acceptable
 		(type SYMBOL)
 		(allowed-values alta mitja baixa)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot nom
-		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot assignatura
@@ -56,13 +56,13 @@
 		(type INSTANCE)
 ;+		(allowed-classes Tema)
 		(create-accessor read-write))
-	(single-slot sigles
-		(type STRING)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(single-slot horari
 		(type SYMBOL)
 		(allowed-values mati tarda mati-tarda)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot sigles
+		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot qualificacio
@@ -78,12 +78,12 @@
 		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot maxim-assignatures
-		(type INTEGER)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(single-slot nom-alumne
 		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot maxim-assignatures
+		(type INTEGER)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(multislot temes
@@ -107,18 +107,23 @@
 		(type INTEGER)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot perfil
-		(type INSTANCE)
-;+		(allowed-classes Perfil)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(single-slot horari-convocatoria
 		(type SYMBOL)
 		(allowed-values mati tarda)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
+	(single-slot perfil
+		(type INSTANCE)
+;+		(allowed-classes Perfil)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot numero-convocatoria
 		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot dificultat
+		(type SYMBOL)
+		(allowed-values alta mitja baixa)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(multislot prerequisits
@@ -157,6 +162,11 @@
 		(allowed-values obligatoria optativa ale)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
+	(single-slot dificultat
+		(type SYMBOL)
+		(allowed-values alta mitja baixa)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(multislot prerequisits
 		(type INSTANCE)
 ;+		(allowed-classes Assignatura)
@@ -171,13 +181,13 @@
 		(allowed-values FALSE TRUE)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot sigles
-		(type STRING)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(single-slot horari
 		(type SYMBOL)
 		(allowed-values mati tarda mati-tarda)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot sigles
+		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot hores-laboratori
@@ -253,13 +263,13 @@
 ;+		(allowed-classes Perfil)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
+	(single-slot nom-usuari
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot expedient
 		(type INSTANCE)
 ;+		(allowed-classes Expedient)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot nom-usuari
-		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot dificultat-acceptable
@@ -267,12 +277,12 @@
 		(allowed-values alta mitja baixa)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot maxim-assignatures
-		(type INTEGER)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(single-slot nom-alumne
 		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot maxim-assignatures
+		(type INTEGER)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot maxim-hores
