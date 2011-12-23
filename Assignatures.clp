@@ -832,7 +832,7 @@
   (preferencies si)
   ?u <- (alumne-actual (tipus-horari desconegut))
   =>
-  (bind ?horari (pregunta-conjunto "Quan vols assistir a clase?" mati tarda))
+  (bind ?horari (pregunta-conjunto "Quan vols assistir a clase?" mati tarda indiferent))
   (modify ?u (tipus-horari ?horari))
 )
 (defrule demana-temes
@@ -958,7 +958,7 @@
 )
 
 (defrule dificultat-assumible-baixa
-	?u <- (alumne-actual (dificultat-acceptable "facilial"))
+	?u <- (alumne-actual (dificultat-acceptable "facil"))
 	=>
 	(assert
 		(dificultat-assumible baixa))
@@ -1046,6 +1046,23 @@
 		)
 	)
 )
-;(defrule aconseguir-llista-assignatures-sense-prerequisit
-	
-;	)
+
+(defrule calcular-horari-mati
+	?u <- (alumne-actual (tipus-horari "mati"))
+	=>
+	(assert (horari mati))
+)
+
+(defrule calcular-horari-tarda
+	?u <- (alumne-actual (tipus-horari "tarda"))
+	=>
+	(assert (horari mati))
+)
+
+(defrule calcular-horari-indiferent
+	?u <- (alumne-actual (tipus-horari "indiferent"))
+	=>
+	(assert 
+		(horari mati)
+		(horari tarda))
+)
