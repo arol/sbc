@@ -1006,6 +1006,21 @@
 	)
 )
 
+(defrule ajustar-temes
+    ?u <- (alumne-actual (temes $?temes)) 
+    =>
+    (printout t ?temes crlf)
+    (progn$
+        (?tema ?temes) 
+        ;(printout t ?tema crlf)
+        (assert (li-interesa ?tema))
+    )
+)
+(defrule ajustar-perfil
+    ?u <- (alumne-actual (perfil ?perfil)) 
+    =>
+    (assert (li-interesa-perfil ?perfil))
+)
 (defrule calcul-volum-feina
 	?u <- (alumne-actual 
 			(num-assigs ?num-assigs)
@@ -1047,6 +1062,7 @@
 	)
 )
 
+
 (defrule calcular-horari-mati
 	?u <- (alumne-actual (tipus-horari "mati"))
 	=>
@@ -1066,3 +1082,4 @@
 		(horari mati)
 		(horari tarda))
 )
+
