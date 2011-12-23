@@ -334,67 +334,67 @@ Carreguem la ontologia
 ;+ (build "Build 620")
 (definstances instancies
 	
-([Assignatures_Class0] of  Especialitzat
+([MAIN::Assignatures_Class0] of  Especialitzat
 
 	(afins
-		[Assignatures_Class4]
-		[Assignatures_Class1])
+		[MAIN::Assignatures_Class4]
+		[MAIN::Assignatures_Class1])
 	(nom-tema "Bases de Dades"))
 
-([Assignatures_Class1] of  General
+([MAIN::Assignatures_Class1] of  General
 
 	(nom-tema "Enginyeria del Software"))
 
-([Assignatures_Class10] of  Especialitzat
+([MAIN::Assignatures_Class10] of  Especialitzat
 
-	(afins [Assignatures_Class1])
+	(afins [MAIN::Assignatures_Class1])
 	(nom-tema "Intel·ligencia Artificial"))
 
-([Assignatures_Class10004] of  Perfil
+([MAIN::Assignatures_Class10004] of  Perfil
 
 	(nom-perfil "Representacio grafica")
 	(temes
-		[Assignatures_Class10005]
-		[Assignatures_Class4]
-		[Assignatures_Class5]
-		[Assignatures_Class3]))
+		[MAIN::Assignatures_Class10005]
+		[MAIN::Assignatures_Class4]
+		[MAIN::Assignatures_Class5]
+		[MAIN::Assignatures_Class3]))
 
-([Assignatures_Class10005] of  General
+([MAIN::Assignatures_Class10005] of  General
 
 	(nom-tema "Visualitzacio"))
 
-([Assignatures_Class10006] of  Especialitzat
+([MAIN::Assignatures_Class10006] of  Especialitzat
 
 	(afins
-		[Assignatures_Class1]
-		[Assignatures_Class2]
-		[Assignatures_Class0])
+		[MAIN::Assignatures_Class1]
+		[MAIN::Assignatures_Class2]
+		[MAIN::Assignatures_Class0])
 	(nom-tema "Sistemes Informacio"))
 
-([Assignatures_Class10007] of  Perfil
+([MAIN::Assignatures_Class10007] of  Perfil
 
 	(nom-perfil "Gestio empresarial")
 	(temes
-		[Assignatures_Class1]
-		[Assignatures_Class10006]
-		[Assignatures_Class2]
-		[Assignatures_Class7]))
+		[MAIN::Assignatures_Class1]
+		[MAIN::Assignatures_Class10006]
+		[MAIN::Assignatures_Class2]
+		[MAIN::Assignatures_Class7]))
 
-([Assignatures_Class10008] of  Convocatoria
+([MAIN::Assignatures_Class10008] of  Convocatoria
 
-	(assignatura [Assignatures_Class10017])
+	(assignatura [MAIN::Assignatures_Class10017])
 	(horari-convocatoria mati)
 	(numero-convocatoria 1)
 	(quadrimestre "2006-1")
 	(qualificacio 4.5))
 
-([Assignatures_Class10011] of  Alumne
+([MAIN::Assignatures_Class10011] of  Alumne
 
 	(expedient [MAIN::Assignatures_Class10032])
 	(nom-alumne "Arol Vinolas")
 	(nom-usuari "harold.vinolas"))
 
-([Assignatures_Class10012] of  Assignatura
+([MAIN::Assignatures_Class10012] of  Assignatura
 
 	(curs 4)
 	(horari tarda)
@@ -404,21 +404,21 @@ Carreguem la ontologia
 	(nom "Visualitzacio Avancada")
 	(num-matriculats 100)
 	(percentatge-aprovats 85)
-	(prerequisits [Assignatures_Class10015])
+	(prerequisits [MAIN::Assignatures_Class10015])
 	(sigles "VA")
-	(tema [Assignatures_Class3])
+	(tema [MAIN::Assignatures_Class3])
 	(tipus optativa))
 
-([Assignatures_Class10013] of  General
+([MAIN::Assignatures_Class10013] of  General
 
 	(nom-tema "Arquitectura"))
 
-([Assignatures_Class10014] of  Especialitzat
+([MAIN::Assignatures_Class10014] of  Especialitzat
 
-	(afins [Assignatures_Class10013])
+	(afins [MAIN::Assignatures_Class10013])
 	(nom-tema "Eficiencia"))
 
-([Assignatures_Class10015] of  Assignatura
+([MAIN::Assignatures_Class10015] of  Assignatura
 
 	(curs 3)
 	(horari mati-tarda)
@@ -429,10 +429,10 @@ Carreguem la ontologia
 	(num-matriculats 350)
 	(percentatge-aprovats 70)
 	(sigles "VIG")
-	(tema [Assignatures_Class10005])
+	(tema [MAIN::Assignatures_Class10005])
 	(tipus obligatoria))
 
-([Assignatures_Class10016] of  Assignatura
+([MAIN::Assignatures_Class10016] of  Assignatura
 
 	(curs 3)
 	(horari mati-tarda)
@@ -443,10 +443,10 @@ Carreguem la ontologia
 	(num-matriculats 250)
 	(percentatge-aprovats 90)
 	(sigles "Empresa i Entorn Economic")
-	(tema [Assignatures_Class2])
+	(tema [MAIN::Assignatures_Class2])
 	(tipus obligatoria))
 
-([Assignatures_Class10017] of  Assignatura
+([MAIN::Assignatures_Class10017] of  Assignatura
 
 	(curs 2)
 	(horari mati-tarda)
@@ -457,14 +457,14 @@ Carreguem la ontologia
 	(num-matriculats 100)
 	(percentatge-aprovats 65)
 	(sigles "IL")
-	(tema [Assignatures_Class10018])
+	(tema [MAIN::Assignatures_Class10018])
 	(tipus obligatoria))
 
-([Assignatures_Class10018] of  General
+([MAIN::Assignatures_Class10018] of  General
 
 	(nom-tema "Logica"))
 
-([Assignatures_Class10019] of  Assignatura
+([MAIN::Assignatures_Class10019] of  Assignatura
 
 	(curs 5)
 	(horari mati-tarda)
@@ -474,12 +474,12 @@ Carreguem la ontologia
 	(nom "Inteligencia Artificial")
 	(num-matriculats 250)
 	(percentatge-aprovats 80)
-	(prerequisits [Assignatures_Class10017])
+	(prerequisits [MAIN::Assignatures_Class10017])
 	(sigles "IA")
-	(tema [Assignatures_Class10])
+	(tema [MAIN::Assignatures_Class10])
 	(tipus obligatoria))
 
-([Assignatures_Class10020] of  Assignatura
+([MAIN::Assignatures_Class10020] of  Assignatura
 
 	(curs 3)
 	(horari mati-tarda)
@@ -490,10 +490,10 @@ Carreguem la ontologia
 	(num-matriculats 200)
 	(percentatge-aprovats 90)
 	(sigles "BD")
-	(tema [Assignatures_Class0])
+	(tema [MAIN::Assignatures_Class0])
 	(tipus obligatoria))
 
-([Assignatures_Class10021] of  Assignatura
+([MAIN::Assignatures_Class10021] of  Assignatura
 
 	(curs 3)
 	(horari mati-tarda)
@@ -503,12 +503,12 @@ Carreguem la ontologia
 	(nom "Enginyeria del Software II")
 	(num-matriculats 300)
 	(percentatge-aprovats 85)
-	(prerequisits [Assignatures_Class10020])
+	(prerequisits [MAIN::Assignatures_Class10020])
 	(sigles "ES2")
-	(tema [Assignatures_Class1])
+	(tema [MAIN::Assignatures_Class1])
 	(tipus obligatoria))
 
-([Assignatures_Class10022] of  Assignatura
+([MAIN::Assignatures_Class10022] of  Assignatura
 
 	(curs 4)
 	(horari mati-tarda)
@@ -519,72 +519,72 @@ Carreguem la ontologia
 	(num-matriculats 200)
 	(percentatge-aprovats 90)
 	(prerequisits
-		[Assignatures_Class10020]
-		[Assignatures_Class10021])
+		[MAIN::Assignatures_Class10020]
+		[MAIN::Assignatures_Class10021])
 	(projecte TRUE)
 	(sigles "PESBD")
-	(tema [Assignatures_Class1])
+	(tema [MAIN::Assignatures_Class1])
 	(tipus obligatoria))
 
-([Assignatures_Class10023] of  Convocatoria
+([MAIN::Assignatures_Class10023] of  Convocatoria
 
-	(assignatura [Assignatures_Class10017])
+	(assignatura [MAIN::Assignatures_Class10017])
 	(horari-convocatoria mati)
 	(numero-convocatoria 2)
 	(quadrimestre "2006-2")
 	(qualificacio 5.2))
 
-([Assignatures_Class10024] of  Convocatoria
+([MAIN::Assignatures_Class10024] of  Convocatoria
 
-	(assignatura [Assignatures_Class10016])
+	(assignatura [MAIN::Assignatures_Class10016])
 	(horari-convocatoria mati)
 	(numero-convocatoria 1)
 	(quadrimestre "2007-2")
 	(qualificacio 7.0))
 
-([Assignatures_Class10025] of  Convocatoria
+([MAIN::Assignatures_Class10025] of  Convocatoria
 
-	(assignatura [Assignatures_Class10020])
+	(assignatura [MAIN::Assignatures_Class10020])
 	(horari-convocatoria mati)
 	(numero-convocatoria 1)
 	(quadrimestre "2007-1")
 	(qualificacio 5.6))
 
-([Assignatures_Class10026] of  Convocatoria
+([MAIN::Assignatures_Class10026] of  Convocatoria
 
-	(assignatura [Assignatures_Class10021])
+	(assignatura [MAIN::Assignatures_Class10021])
 	(horari-convocatoria tarda)
 	(numero-convocatoria 1)
 	(quadrimestre "2008-2")
 	(qualificacio 7.5))
 
-([Assignatures_Class10027] of  Convocatoria
+([MAIN::Assignatures_Class10027] of  Convocatoria
 
-	(assignatura [Assignatures_Class10022])
+	(assignatura [MAIN::Assignatures_Class10022])
 	(horari-convocatoria tarda)
 	(numero-convocatoria 1)
 	(quadrimestre "2009-1")
 	(qualificacio 10.0))
 
-([Assignatures_Class10028] of  Convocatoria
+([MAIN::Assignatures_Class10028] of  Convocatoria
 
-	(assignatura [Assignatures_Class10015])
+	(assignatura [MAIN::Assignatures_Class10015])
 	(horari-convocatoria tarda)
 	(numero-convocatoria 1)
 	(quadrimestre "2009-1")
 	(qualificacio 3.0))
 
-([Assignatures_Class10029] of  Convocatoria
+([MAIN::Assignatures_Class10029] of  Convocatoria
 
-	(assignatura [Assignatures_Class10015])
+	(assignatura [MAIN::Assignatures_Class10015])
 	(horari-convocatoria tarda)
 	(numero-convocatoria 2)
 	(quadrimestre "2009-2")
 	(qualificacio 6.0))
 
-([Assignatures_Class10030] of  Convocatoria
+([MAIN::Assignatures_Class10030] of  Convocatoria
 
-	(assignatura [Assignatures_Class10012])
+	(assignatura [MAIN::Assignatures_Class10012])
 	(horari-convocatoria tarda)
 	(numero-convocatoria 1)
 	(quadrimestre "2010-1")
@@ -593,56 +593,56 @@ Carreguem la ontologia
 ([MAIN::Assignatures_Class10032] of  Expedient
 
 	(convocatories
-		[Assignatures_Class10008]
-		[Assignatures_Class10023]
-		[Assignatures_Class10025]
-		[Assignatures_Class10024]
-		[Assignatures_Class10026]
-		[Assignatures_Class10027]
-		[Assignatures_Class10028]
-		[Assignatures_Class10029]
-		[Assignatures_Class10030]))
+		[MAIN::Assignatures_Class10008]
+		[MAIN::Assignatures_Class10023]
+		[MAIN::Assignatures_Class10025]
+		[MAIN::Assignatures_Class10024]
+		[MAIN::Assignatures_Class10026]
+		[MAIN::Assignatures_Class10027]
+		[MAIN::Assignatures_Class10028]
+		[MAIN::Assignatures_Class10029]
+		[MAIN::Assignatures_Class10030]))
 
-([Assignatures_Class10033] of  Perfil
+([MAIN::Assignatures_Class10033] of  Perfil
 
 	(nom-perfil "Enginyeria del Software")
 	(temes
-		[Assignatures_Class10006]
-		[Assignatures_Class1]))
+		[MAIN::Assignatures_Class10006]
+		[MAIN::Assignatures_Class1]))
 
-([Assignatures_Class11] of  Especialitzat
+([MAIN::Assignatures_Class11] of  Especialitzat
 
-	(afins [Assignatures_Class10])
+	(afins [MAIN::Assignatures_Class10])
 	(nom-tema "LISP"))
 
-([Assignatures_Class2] of  No-informatics
+([MAIN::Assignatures_Class2] of  No-informatics
 
 	(nom-tema "Empresa"))
 
-([Assignatures_Class3] of  Especialitzat
+([MAIN::Assignatures_Class3] of  Especialitzat
 
 	(afins
-		[Assignatures_Class4]
-		[Assignatures_Class10005])
+		[MAIN::Assignatures_Class4]
+		[MAIN::Assignatures_Class10005])
 	(nom-tema "Realitat Augmentada"))
 
-([Assignatures_Class4] of  General
+([MAIN::Assignatures_Class4] of  General
 
 	(nom-tema "Matematiques"))
 
-([Assignatures_Class5] of  General
+([MAIN::Assignatures_Class5] of  General
 
 	(nom-tema "Fisica"))
 
-([Assignatures_Class7] of  No-informatics
+([MAIN::Assignatures_Class7] of  No-informatics
 
 	(nom-tema "Lideratge"))
 
-([Assignatures_Class8] of  No-informatics
+([MAIN::Assignatures_Class8] of  No-informatics
 
 	(nom-tema "Ludic"))
 
-([Assignatures_Class9] of  Especialitzat
+([MAIN::Assignatures_Class9] of  Especialitzat
 
 	(nom-tema "Android"))
 
@@ -784,7 +784,7 @@ Carreguem la ontologia
     (assert (preferencies si))
   )
   (if (eq (str-compare ?resposta no) 0) then
-    (focus inferencia)
+    (focus borrar-assignatures)
   )
 )
 (defrule demana-num-assigs 
@@ -856,10 +856,11 @@ Carreguem la ontologia
 )
 
 ;llavors el fem servir al agafar les dades:
-(defmodule inferencia "modul que pregunta les dades a l'usuari"
+(defmodule borrar-assignatures "modul que pregunta les dades a l'usuari"
     (import MAIN ?ALL)
     (export ?ALL)
 )
+
 (defrule aconseguir-llista-assignatures-cursades 
   (alumne-actual (nom-usuari ?nomUsuari))
 	?alumne <- (object (is-a Alumne)(nom-usuari ?nomUsuari))
@@ -873,6 +874,14 @@ Carreguem la ontologia
   (bind ?expedient (send ?alumne get-expedient))
   (printout t ?expedient crlf )
   (bind $?convocatories (send ?expedient get-convocatories))
-  (printout t $?convocatories crlf )
-  (bind ?MaxNumAssigs (pregunta "asodasjdajsdl"))
+  ;(printout t $?convocatories crlf )
+  ;(bind ?MaxNumAssigs (pregunta "asodasjdajsdl"))
+	(progn$ 
+	(?convocatoria ?convocatories) 
+	(printout t (send ?convocatoria get-qualificacio) crlf))
+
   )
+
+(defrule aconseguir-llista-assignatures-sense-prerequisit
+	
+	)
