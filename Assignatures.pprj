@@ -1,4 +1,4 @@
-; Fri Dec 23 16:35:47 CET 2011
+; Fri Dec 23 17:43:43 CET 2011
 ; 
 ;+ (version "3.4.7")
 ;+ (build "Build 620")
@@ -22,6 +22,68 @@
 	(is_hidden TRUE)
 	(property_list [Assignatures_ProjectKB_Class11])
 	(widget_class_name "uk.ac.man.cs.mig.coode.debugger.test.DebuggerTestTab"))
+
+([Assignatures_ProjectKB_Class10155] of  String
+
+	(name "Expedient")
+	(string_value "convocatories"))
+
+([Assignatures_ProjectKB_Class10156] of  String
+
+	(name ":INSTANCE-ANNOTATION")
+	(string_value "%3AANNOTATION-TEXT"))
+
+([Assignatures_ProjectKB_Class10157] of  String
+
+	(name "Perfil")
+	(string_value "nom-perfil"))
+
+([Assignatures_ProjectKB_Class10158] of  String
+
+	(name "Alumne")
+	(string_value "nom-alumne"))
+
+([Assignatures_ProjectKB_Class10159] of  String
+
+	(name "Especialitzat")
+	(string_value "nom-tema"))
+
+([Assignatures_ProjectKB_Class10160] of  String
+
+	(name ":PAL-CONSTRAINT")
+	(string_value "%3APAL-NAME"))
+
+([Assignatures_ProjectKB_Class10161] of  String
+
+	(name ":META-CLASS")
+	(string_value "%3ANAME"))
+
+([Assignatures_ProjectKB_Class10162] of  String
+
+	(name "Assignatura")
+	(string_value "sigles"))
+
+([Assignatures_ProjectKB_Class10163] of  String
+
+	(name "Convocatoria")
+	(string_value "quadrimestre{+}assignatura"))
+
+([Assignatures_ProjectKB_Class10164] of  String
+
+	(name "General")
+	(string_value "nom-tema"))
+
+([Assignatures_ProjectKB_Class10165] of  String
+
+	(name "No-informatics")
+	(string_value "nom-tema"))
+
+([Assignatures_ProjectKB_Class10166] of  Map_Entry
+
+	(key "collab.hide.archived")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
 
 ([Assignatures_ProjectKB_Class107] of  String
 
@@ -77,96 +139,6 @@
 	(is_hidden TRUE)
 	(property_list [Assignatures_ProjectKB_Class21])
 	(widget_class_name "edu.stanford.smi.protegex.widget.pal.PalConstraintsTab"))
-
-([Assignatures_ProjectKB_Class20144] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "ects")
-	(property_list [Assignatures_ProjectKB_Class20145])
-	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
-	(width 200)
-	(x 0)
-	(y 240))
-
-([Assignatures_ProjectKB_Class20145] of  Property_List
-)
-
-([Assignatures_ProjectKB_Class20146] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "ects")
-	(property_list [Assignatures_ProjectKB_Class20147])
-	(widget_class_name "edu.stanford.smi.protege.widget.IntegerFieldWidget")
-	(width 100)
-	(x 0)
-	(y 240))
-
-([Assignatures_ProjectKB_Class20147] of  Property_List
-)
-
-([Assignatures_ProjectKB_Class20220] of  String
-
-	(name ":INSTANCE-ANNOTATION")
-	(string_value "%3AANNOTATION-TEXT"))
-
-([Assignatures_ProjectKB_Class20221] of  String
-
-	(name "Expedient")
-	(string_value "convocatories"))
-
-([Assignatures_ProjectKB_Class20222] of  String
-
-	(name "Perfil")
-	(string_value "nom-perfil"))
-
-([Assignatures_ProjectKB_Class20223] of  String
-
-	(name "Especialitzat")
-	(string_value "nom-tema"))
-
-([Assignatures_ProjectKB_Class20224] of  String
-
-	(name "Alumne")
-	(string_value "nom-alumne"))
-
-([Assignatures_ProjectKB_Class20225] of  String
-
-	(name ":META-CLASS")
-	(string_value "%3ANAME"))
-
-([Assignatures_ProjectKB_Class20226] of  String
-
-	(name ":PAL-CONSTRAINT")
-	(string_value "%3APAL-NAME"))
-
-([Assignatures_ProjectKB_Class20227] of  String
-
-	(name "Assignatura")
-	(string_value "sigles"))
-
-([Assignatures_ProjectKB_Class20228] of  String
-
-	(name "No-informatics")
-	(string_value "nom-tema"))
-
-([Assignatures_ProjectKB_Class20229] of  String
-
-	(name "General")
-	(string_value "nom-tema"))
-
-([Assignatures_ProjectKB_Class20230] of  String
-
-	(name "Convocatoria")
-	(string_value "quadrimestre{+}assignatura"))
-
-([Assignatures_ProjectKB_Class20231] of  Map_Entry
-
-	(key "collab.hide.archived")
-	(key_class "java.lang.String")
-	(value "false")
-	(value_class "java.lang.String"))
 
 ([Assignatures_ProjectKB_Class21] of  Property_List
 )
@@ -474,17 +446,17 @@
 ([BROWSER_SLOT_NAMES] of  Property_List
 
 	(properties
-		[Assignatures_ProjectKB_Class20220]
-		[Assignatures_ProjectKB_Class20221]
-		[Assignatures_ProjectKB_Class20222]
-		[Assignatures_ProjectKB_Class20223]
-		[Assignatures_ProjectKB_Class20224]
-		[Assignatures_ProjectKB_Class20225]
-		[Assignatures_ProjectKB_Class20226]
-		[Assignatures_ProjectKB_Class20227]
-		[Assignatures_ProjectKB_Class20228]
-		[Assignatures_ProjectKB_Class20229]
-		[Assignatures_ProjectKB_Class20230]))
+		[Assignatures_ProjectKB_Class10155]
+		[Assignatures_ProjectKB_Class10156]
+		[Assignatures_ProjectKB_Class10157]
+		[Assignatures_ProjectKB_Class10158]
+		[Assignatures_ProjectKB_Class10159]
+		[Assignatures_ProjectKB_Class10160]
+		[Assignatures_ProjectKB_Class10161]
+		[Assignatures_ProjectKB_Class10162]
+		[Assignatures_ProjectKB_Class10163]
+		[Assignatures_ProjectKB_Class10164]
+		[Assignatures_ProjectKB_Class10165]))
 
 ([CLSES_TAB] of  Widget
 
@@ -532,7 +504,7 @@
 
 ([KB_195611_Class1] of  Map
 
-	(entries [Assignatures_ProjectKB_Class20231]))
+	(entries [Assignatures_ProjectKB_Class10166]))
 
 ([KB_195611_Class100] of  Property_List
 )
@@ -626,7 +598,7 @@
 ([KB_195611_Class99] of  Property_List
 )
 
-([KB_439566_Class1] of  Map
+([KB_219212_Class1] of  Map
 )
 
 ([LAYOUT_PROPERTIES] of  Property_List
@@ -712,8 +684,8 @@
 	(browser_slot_names [BROWSER_SLOT_NAMES])
 	(customized_instance_widgets
 		[INSTANCE_ANNOTATION_FORM_WIDGET]
-		[STANDARD_SLOT_FORM_WIDGET]
 		[STANDARD_FACET_FORM_WIDGET]
+		[STANDARD_SLOT_FORM_WIDGET]
 		[PAL_FORM_WIDGET]
 		[STANDARD_CLASS_FORM_WIDGET])
 	(default_cls_metaclass ":STANDARD-CLASS")

@@ -1,4 +1,4 @@
-; Fri Dec 23 16:35:47 CET 2011
+; Fri Dec 23 17:43:43 CET 2011
 ; 
 ;+ (version "3.4.7")
 ;+ (build "Build 620")
@@ -459,9 +459,16 @@
 ([Assignatures_Class30010] of  Assignatura
 
 	(curs 3)
+	(dificultat mitja)
 	(ects 7.2)
+	(horari mati-tarda)
+	(hores-laboratori 0)
+	(hores-teoria 28)
 	(nom "Enginyeria del software 1")
-	(sigles "ES1"))
+	(num-matriculats 350)
+	(percentatge-aprovats 83)
+	(sigles "ES1")
+	(tema [Assignatures_Class1]))
 
 ([Assignatures_Class30011] of  Convocatoria
 
@@ -492,9 +499,6 @@
 	(numero-convocatoria 1)
 	(quadrimestre "2011-1")
 	(qualificacio 10.0))
-
-([Assignatures_Class30015] of  Assignatura
-)
 
 ([Assignatures_Class4] of  General
 

@@ -341,7 +341,7 @@
 		
 (definstances instancies		
 
-	; Fri Dec 23 16:35:47 CET 2011
+	; Fri Dec 23 17:41:47 CET 2011
 	; 
 	;+ (version "3.4.7")
 	;+ (build "Build 620")
@@ -802,9 +802,16 @@
 	([MAIN::Assignatures_Class30010] of  Assignatura
 
 		(curs 3)
+		(dificultat mitja)
 		(ects 7.2)
+		(horari mati-tarda)
+		(hores-laboratori 0)
+		(hores-teoria 28)
 		(nom "Enginyeria del software 1")
-		(sigles "ES1"))
+		(num-matriculats 350)
+		(percentatge-aprovats 83)
+		(sigles "ES1")
+		(tema [MAIN::Assignatures_Class1]))
 
 	([MAIN::Assignatures_Class30011] of  Convocatoria
 
@@ -836,9 +843,6 @@
 		(quadrimestre "2011-1")
 		(qualificacio 10.0))
 
-	([MAIN::Assignatures_Class30015] of  Assignatura
-	)
-
 	([MAIN::Assignatures_Class4] of  General
 
 		(nom-tema "Matematiques"))
@@ -858,6 +862,7 @@
 	([MAIN::Assignatures_Class9] of  Especialitzat
 
 		(nom-tema "Android"))
+
 
 
 )
@@ -1321,6 +1326,7 @@
 	?recomanacio <- (recomanacio (nom ?nom) (punts ?punts))
     (not (visitat associar-temes ?nom))
 	=>
+	;(printout t ?assignatura crlf)
     (if (eq (str-compare (lowcase ?tema) (lowcase (send(send ?assignatura get-tema) get-nom-tema) ))0) then
         (modify ?recomanacio (punts (+ ?punts 6)))
         (assert (visitat associar-temes ?nom))
