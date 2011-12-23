@@ -1,4 +1,4 @@
-; Tue Dec 20 11:39:56 CET 2011
+; Fri Dec 23 02:05:51 CET 2011
 ; 
 ;+ (version "3.4.7")
 ;+ (build "Build 620")
@@ -18,6 +18,34 @@
 
 	(afins [Assignatures_Class1])
 	(nom-tema "Intel·ligencia Artificial"))
+
+([Assignatures_Class10000] of  Assignatura
+
+	(curs 5)
+	(horari mati-tarda)
+	(hores-laboratori 0)
+	(hores-teoria 32)
+	(nom "Sistemes de gestio de bases de dades i dobjectes")
+	(num-matriculats 20)
+	(percentatge-aprovats 90)
+	(prerequisits [Assignatures_Class10001])
+	(sigles "SGBDO")
+	(tema [Assignatures_Class0])
+	(tipus optativa))
+
+([Assignatures_Class10001] of  Assignatura
+
+	(curs 4)
+	(horari tarda)
+	(hores-laboratori 26)
+	(hores-teoria 44)
+	(nom "Disseny i administracio de bases de dades")
+	(num-matriculats 60)
+	(percentatge-aprovats 80)
+	(prerequisits [Assignatures_Class10020])
+	(sigles "DABD")
+	(tema [Assignatures_Class0])
+	(tipus optativa))
 
 ([Assignatures_Class10004] of  Perfil
 
@@ -108,10 +136,10 @@
 	(hores-dedicacio "150")
 	(hores-laboratori 0)
 	(hores-teoria 45)
-	(nom "Economia")
+	(nom "Empresa i Entorn Economic")
 	(num-matriculats 250)
 	(percentatge-aprovats 90)
-	(sigles "Empresa i Entorn Economic")
+	(sigles "E3")
 	(tema [Assignatures_Class2])
 	(tipus obligatoria))
 
