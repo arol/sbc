@@ -1159,7 +1159,7 @@
 (defrule calcular-horari-tarda
 	?u <- (alumne-actual (tipus-horari "tarda"))
 	=>
-	(assert (horari mati))
+	(assert (horari tarda))
 )
 
 (defrule calcular-horari-indiferent
@@ -1210,6 +1210,26 @@
         (modify ?recomanacio (punts (+ ?punts 1)))
         (assert (visitat asociar-temes ?nom))
     )
+)
+
+(defrule asociar-horari
+    (horari ?horari) 
+	?assignatura <- (object (is-a Assignatura)(nom ?nom)(horari ?horari|mati-tarda))
+	?recomanacio <- (recomanacio (nom ?nom) (punts ?punts))
+    (not (visitat asociar-horari ?nom))
+	=>
+    ;(if (eq(str-compare (lowcase (send(send ?assignatura get-horari))) "mati-tarda") 0)
+    ;    (modify ?recomanacio (punts (+ ?punts 3)))
+    ;    (assert (visitat asociar-horari ?nom))
+    ; else
+    ;    (if (eq (str-compare (lowcase ?tema) (lowcase (send(send ?assignatura get-horari) get-nom-tema) ))0) then
+    ;        (modify ?recomanacio (punts (+ ?punts 3)))
+    ;        (assert (visitat asociar-horari ?nom))
+    ;    )
+    ;)
+    
+    (modify ?recomanacio (punts (+ ?punts 3)))
+    (assert (visitat asociar-horari ?nom))
 )
 
 (defrule asociar-dificultat-assumible
