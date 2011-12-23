@@ -1019,7 +1019,14 @@
 (defrule ajustar-perfil
     ?u <- (alumne-actual (perfil ?perfil)) 
     =>
-    (assert (li-interesa-perfil ?perfil))
+    (bind ?perfilObj (find-instance ((?perfilp Perfil)) (eq (str-compare (lowcase ?perfilp:nom-perfil) ?perfil) 0)))
+    (bind ?perfilObj (nth$ 1 ?perfilObj))
+    (bind $?temes (send ?perfilObj get-temes))
+    (progn$
+        (?tema ?temes) 
+        (printout t "entro" crlf)
+        (assert (li-interesa (send ?tema get-nom-tema)))
+    )
 )
 (defrule calcul-volum-feina
 	?u <- (alumne-actual 
@@ -1081,5 +1088,26 @@
 	(assert 
 		(horari mati)
 		(horari tarda))
+)
+
+(defrule anar-a-modul-associacio-heuristica
+	(declare (salience -1))
+	=>
+	(focus AsocicacioHeuristica)
+)
+
+(defmodule AsocicacioHeuristica 
+    (export ?ALL)
+    (import MAIN ?ALL)
+    (import inferencia ?ALL)
+)
+
+(defrule asociar-temes
+    (li-interesa ?perfil)
+	=>
+    (do-for-all-instances
+       ((?assig Assignatura))
+       TRUE
+    )
 )
 
