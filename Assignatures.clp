@@ -1200,12 +1200,11 @@
 
 (defrule asociar-temes
     (li-interesa ?tema)
+	?assignatura <- (object (is-a Assignatura)(nom ?nom))
+	?recomanacio <- (recomanacio (nom ?nom) (punts ?punts))
 	=>
-    (do-for-all-instances
-        ((?assig Assignatura))
-        TRUE
-
-        (if (eq (str-compare (lowcase ?tema) (lowcase (send(send ?assig get-tema) get-nom-tema) ))0) then
-        )
+    (printout t ?punts crlf)
+    (if (eq (str-compare (lowcase ?tema) (lowcase (send(send ?assignatura get-tema) get-nom-tema) ))0) then
+     (printout t ?punts crlf)
     )
 )
