@@ -861,39 +861,31 @@ Carreguem la ontologia
     (export ?ALL)
 )
 
-(defrule agafar-convocatories
+;(deffunction llista-convocatories ()
+;	(bind $?nomAssignaturesCursades (create$))
+;	(progn$ 
+;		(?convocatoria ?convocatories)
+;		(bind $?nomAssignaturesCursades 
+;			(insert$ $?nomAssignaturesCursades 1 (send (send ?convocatoria get-assignatura) get-nom) ))
+;	)
+;
+;	$?convocatories
+;)
+
+(defrule eliminar-assignatures-cursades 
 	(alumne-actual (nom-usuari ?nomUsuari))
 	?alumne <- (object (is-a Alumne)(nom-usuari ?nomUsuari))
 	=>
-		(printout t "" crlf)
-		(printout t "Molt be, ")
-		(printout t ?alumne crlf)
-		(printout t (send ?alumne get-nom-alumne) )
-		(printout t ". Anem per feina!" crlf)
-		
-		(bind ?expedient (send ?alumne get-expedient))
-		(printout t ?expedient crlf )
-		(bind $?convocatories (send ?expedient get-convocatories))
-		(bind $?nomAssignaturesCursades (create$))
-		(progn$ 
-			(?convocatoria ?convocatories)
-			(bind $?nomAssignaturesCursades 
-				(insert$ $?nomAssignaturesCursades 1 (send (send ?convocatoria get-assignatura) get-nom) ))
-		)
-		(assert (convocatoriesLlistades true))
-	)
-
-(defrule eliminar-assignatures-cursades 
-  	(convocatoriesLlistades)
-	=>
-	;(printout t $?convocatories crlf )
-	;(bind ?MaxNumAssigs (pregunta "asodasjdajsdl"))
+	(bind ?expedient (send ?alumne get-expedient))
+	(bind $?convocatories (send ?expedient get-convocatories))
 	(progn$ 
 		(?convocatoria ?convocatories) 
-		(if (>= (send ?convocatoria get-qualificacio) 5)
-	
-  )
-
-(defrule aconseguir-llista-assignatures-sense-prerequisit
-	
+		(if (>= (send ?convocatoria get-qualificacio) 5) then
+			(send (send ?convocatoria get-assignatura) delete)
+		)
 	)
+)
+
+;(defrule aconseguir-llista-assignatures-sense-prerequisit
+	
+;	)
