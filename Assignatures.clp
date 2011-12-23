@@ -711,7 +711,7 @@
 
 (deffunction pregunta (?pregunta)
     (format t "%s " ?pregunta)
-    (bind ?resposta (readline))
+    (bind ?resposta (read))
     ?resposta
 )
 
@@ -875,6 +875,12 @@
   (modify ?u (dificultat-acceptable ?dificultat))
 )
 
+(defrule a-borrar-assignaturas
+	(declare (salience -1))
+	=>
+	(focus borrar-assignatures)
+)
+
 ;llavors el fem servir al agafar les dades:
 (defmodule borrar-assignatures "modul que pregunta les dades a l'usuari"
     (import MAIN ?ALL)
@@ -940,6 +946,65 @@
 	)
 )
 
+(defrule a-inferenciar
+	(declare (salience -1))
+	=>
+	(focus inferencia)
+)
+
+(defmodule inferencia
+	(import borrar-assignatures ?ALL)
+	(export ?ALL)
+)
+
+(defrule dificultat-assumible-baixa
+	?u <- (alumne-actual (dificultat-acceptable "facil"))
+	=>
+	(assert
+		(dificultat-assumible baixa))
+)
+
+(defrule calcul-dificultat-assumible
+	?u <- (alumne-actual 
+			(num-assigs ?num-assigs)
+			(maxim-dedicacio ?maxim-dedicacio)
+			(maxim-laboratori ?maxim-laboratori)
+			(dificultat-acceptable ?dificultatAcceptable&"mitjana"|"alta")
+			)
+	=>
+	(printout t "Calculant dificultat assumible" crlf)
+	(bind ?dificultad-assumible 0)
+	
+	(if (< ?num-assigs 3) then
+		(bind ?dificultad-assumible (+ ?dificultad-assumible 2))
+	else 	(if (> ?num-assigs 4) then
+				(bind ?dificultad-assumible (- ?dificultad-assumible 2))
+			)
+	)
+	
+	(if (< ?maxim-dedicacio 15) then
+		(bind ?dificultad-assumible (- ?dificultad-assumible 2))
+	else 	(if (> ?maxim-dedicacio 30) then
+				(bind ?dificultad-assumible (+ ?dificultad-assumible 2))
+			)
+	)
+	
+	(if (< ?maxim-laboratori 3) then
+		(bind ?dificultad-assumible (+ ?dificultad-assumible 2))
+	else 	(if (> ?maxim-laboratori 5) then
+				(bind ?dificultad-assumible (- ?dificultad-assumible 2))
+			)
+	)
+
+	(if (< ?dificultad-assumible -2) then
+		(assert (dificultad-assumible baixa))
+	else (if (and (> ?dificultad-assumible 2) (not (eq (str-compare ?dificultatAcceptable "mitjana") 0))) then
+			(assert (dificultad-assumible alta))
+			else
+			(assert (dificultad-assumible mitja))
+		)
+	)
+)
 
 ;(defrule aconseguir-llista-assignatures-sense-prerequisit
 	
