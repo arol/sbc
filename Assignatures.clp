@@ -806,7 +806,7 @@
     (format t "%s (%s) " ?pregunta (implode$ $?valorsLow))
     ;llegim de l'entrada
     (bind ?resp (readline))
-    (format t "%s " ?resp)
+    ;(format t "%s " ?resp)
     ;mentre no tinguem resposta
     (while (not (member (str-cat (lowcase ?resp) "") $?valorsLow )) do
         (format t "%s (%s) " ?pregunta (implode$ $?valorsLow))
@@ -829,10 +829,9 @@
 	
 	(bind ?resp (readline))
 
-	(printout t (member$  (str-cat (lowcase ?resp) "") $?valorsLow) crlf)
+	;(printout t (member$  (str-cat (lowcase ?resp) "") $?valorsLow) crlf)
 
 	(if (member$ (str-cat (lowcase ?resp) "")  $?valorsLow) then
-		(printout t "holaaaaa" crlf)
 		(bind $?temes (insert$ $?temes 1 ?resp))
 	)
     ;mentre no tinguem resposta
@@ -840,7 +839,7 @@
 	(while (not (eq (str-compare ?resp "fi") 0)) do
         (format t "%s " ?pregunta )
         (bind ?resp (readline))
-		(printout t (lowcase ?resp) crlf)
+		;(printout t (lowcase ?resp) crlf)
 		(if (member$ (str-cat (lowcase ?resp) "")  $?valorsLow) then
 			(bind $?temes (insert$ $?temes 1 ?resp))
 		)
@@ -927,8 +926,8 @@
      (bind $?temes (insert$ $?temes 1 ?tema:nom-tema))
 	 (printout t "" crlf)
   )
-  (bind $?temes (pregunta-multi-conjunto "Quins temes t'interesen" $?temes))
-  (printout t $?temes crlf)
+  (bind $?temes (pregunta-multi-conjunto "Quins temes t'interesen? (escriu fi per finalitzar)" $?temes))
+  ;(printout t $?temes crlf)
 	(modify ?u (temes $?temes))
 )
 (defrule demana-perfil-interesat
@@ -944,7 +943,7 @@
 	 (printout t "" crlf)
   )
   (bind ?perfil (pregunta-conjunto "En quin perfil et vols especialitzar?" $?perfils))
-  (printout t ?perfils crlf)
+  ;(printout t ?perfils crlf)
 	(modify ?u (perfil ?perfil))
 )
 (defrule demana-dificultat-maxima
@@ -1052,7 +1051,7 @@
 			(dificultat-acceptable ?dificultatAcceptable&"mitjana"|"alta")
 			)
 	=>
-	(printout t "Calculant dificultat assumible" crlf)
+	;(printout t "Calculant dificultat assumible" crlf)
 	(bind ?dificultat-assumible 0)
 	
 	(if (< ?num-assigs 3) then
@@ -1089,7 +1088,7 @@
 (defrule ajustar-temes
     ?u <- (alumne-actual (temes $?temes)) 
     =>
-    (printout t ?temes crlf)
+    ;(printout t ?temes crlf)
     (progn$
         (?tema ?temes) 
         ;(printout t ?tema crlf)
@@ -1114,7 +1113,7 @@
 			(maxim-laboratori ?maxim-laboratori)
 			)
 	=>
-	(printout t "Calculant Volum de feina" crlf)
+	;(printout t "Calculant Volum de feina" crlf)
 	(bind ?volum-feina 0)
 	
 	(if (< ?num-assigs 4) then
@@ -1186,6 +1185,7 @@
 	(slot sigles (type STRING))
     (slot punts (type INTEGER))
 	(slot volum-feina (type SYMBOL)(allowed-symbols gran alt mitja baix no-calculat))
+	(slot nivell)
 )
 
 (defrule inizialitzar-recomanacions
@@ -1198,6 +1198,7 @@
 			(sigles (send ?assignatura get-sigles))
 			(punts 0)
 			(volum-feina no-calculat)
+			(nivell indefinit)
 		)
 	)
 )
@@ -1209,7 +1210,7 @@
     (not (visitat associar-temes ?nom))
 	=>
     (if (eq (str-compare (lowcase ?tema) (lowcase (send(send ?assignatura get-tema) get-nom-tema) ))0) then
-        (modify ?recomanacio (punts (+ ?punts 1)))
+        (modify ?recomanacio (punts (+ ?punts 6)))
         (assert (visitat associar-temes ?nom))
     )
 )
@@ -1220,17 +1221,7 @@
 	?recomanacio <- (recomanacio (nom ?nom) (punts ?punts))
     (not (visitat associar-horari ?nom))
 	=>
-    ;(if (eq(str-compare (lowcase (send(send ?assignatura get-horari))) "mati-tarda") 0)
-    ;    (modify ?recomanacio (punts (+ ?punts 3)))
-    ;    (assert (visitat associar-horari ?nom))
-    ; else
-    ;    (if (eq (str-compare (lowcase ?tema) (lowcase (send(send ?assignatura get-horari) get-nom-tema) ))0) then
-    ;        (modify ?recomanacio (punts (+ ?punts 3)))
-    ;        (assert (visitat associar-horari ?nom))
-    ;    )
-    ;)
-    
-    (modify ?recomanacio (punts (+ ?punts 3)))
+    (modify ?recomanacio (punts (+ ?punts 5)))
     (assert (visitat associar-horari ?nom))
 )
 
@@ -1271,7 +1262,7 @@
 		(bind ?volum-feina (+ ?volum-feina 10 ))
 	)
 	
-	(printout t ?nom " - " ?volum-feina crlf)
+	;(printout t ?nom " - " ?volum-feina crlf)
 	
 	(if (> ?volum-feina 10) then
 		(modify ?recomanacio (volum-feina alt))
@@ -1323,13 +1314,107 @@
 )
 
 
+(defmodule refinament "Modul per l'etiquetatge linguistic de les recomanacions"
+	(export ?ALL)
+	(import MAIN ?ALL)
+	(import AsocicacioHeuristica ?ALL)
+)
+
+(defrule mig-recomanat
+	?recomanacio <- (recomanacio (punts ?punts) (nivell indefinit))
+	(test (> ?punts 3) )
+	=>
+	(modify ?recomanacio (nivell mig))
+	(retract ?recomanacio)
+)
 
 
+(defrule alt-recomanat
+	?recomanacio <- (recomanacio (punts ?punts) (nivell mig))
+	(test (>= ?punts 8))
+	=>
+	(modify ?recomanacio (nivell alt))
+	(retract ?recomanacio)
+)
 
+(defrule baix-recomanat
+	?recomanacio <- (recomanacio (punts ?punts) (nivell indefinit))
+	(test (< ?punts 2))
+	=>
+	(modify ?recomanacio (nivell baix))
+	(retract ?recomanacio)
+)
 
+(defrule a-mostar-solucio
+	(declare (salience -1))
+	=>
+	(focus mostar-solucio)
+)
 
+(defmodule mostar-solucio "Modul per mostar les solucions recomanades"
+	(export ?ALL)
+	(import MAIN ?ALL)
+	(import refinament ?ALL)
+)
 
+(defrule titolSolucions
+	(declare (salience 10))
+	=>
+	(printout t crlf)
+	(printout t "+------------------------------------------------+" crlf)
+	(printout t "|                                                |" crlf)
+	(printout t "|             A S S I G N A T U R E S            |" crlf)
+	(printout t "|                                                |" crlf)
+	(printout t "+------------------------------------------------+" crlf)
+)
 
+(defrule titol-molt-recomanades
+	(declare (salience 6))
+	=>
+	(printout t "+------------------------------------------------+" crlf )
+	(printout t "|                                                |" crlf)
+	(printout t "|                MOLT RECOMANADES                |" crlf)
+	(printout t "+------------------------------------------------+" crlf)
+)
 
+(defrule mostar-molt-recomanades
+	(declare (salience 5))
+	?recomanacio <- (recomanacio (nom ?nom) (sigles ?sigles) (nivell alt))
+	=>
+	(printout t ?sigles " - " ?nom crlf)
+)
+
+(defrule titol-recomanades
+	(declare (salience 4))
+	=>
+	(printout t "+------------------------------------------------+" crlf )
+	(printout t "|                                                |" crlf)
+	(printout t "|                  RECOMANADES                   |" crlf)
+	(printout t "+------------------------------------------------+" crlf)
+)
+
+(defrule mostar-recomanades
+	(declare (salience 3))
+	?recomanacio <- (recomanacio (nom ?nom) (sigles ?sigles) (nivell mig))
+	=>
+	(printout t ?sigles " - " ?nom crlf)
+)
+
+(defrule titol-no-recomanades
+	(declare (salience 2))
+	=>
+	(printout t "+------------------------------------------------+" crlf )
+	(printout t "|                                                |" crlf)
+	(printout t "|                 NO RECOMANADES                 |" crlf)
+	(printout t "+------------------------------------------------+" crlf)
+
+)
+
+(defrule mostar-no-recomanades
+	(declare (salience 1))
+	?recomanacio <- (recomanacio (nom ?nom) (sigles ?sigles) (nivell baix))
+	=>
+	(printout t ?sigles " - " ?nom crlf)
+)
 
 
