@@ -1097,14 +1097,17 @@
 (defrule eliminar-assignatures-sense-prerequisit-complert
 	(declare (salience 10))
 	(alumne-actual (nom-usuari ?nomUsuari))
-	?alumne <- (object (is-a Alumne)(nom-usuari ?nomUsuari))
+	;?alumne <- (object (is-a Alumne)(nom-usuari ?nomUsuari))
     =>
+	(bind ?alumne (find-instance ((?alumneinst Alumne)) (eq (str-compare ?alumneinst:nom-usuari ?nomUsuari) 0)))
+	(bind ?alumne (nth$ 1 ?alumne))
+	
 	;aconseguim els noms de les assignatures cursades per lalumne actual
     (bind ?expedient (send ?alumne get-expedient))
 	(bind $?convocatories (send ?expedient get-convocatories))
 
     (bind $?nomAssignaturesCursades (create$))
-    (printout t "chaka chaka")
+    ;(printout t "chaka chaka")
 	(progn$ 
 		(?convocatoria ?convocatories)
 		(bind $?nomAssignaturesCursades 
@@ -1119,9 +1122,9 @@
 		(progn$ 
 	        (?prerequisit ?prerequisits)
 	        (if (not (member (send ?prerequisit get-nom) $?nomAssignaturesCursades)) then
-	            (printout t "No has fet")
+	            (printout t "No has fet ")
 	            (printout t (send ?prerequisit get-nom) crlf)
-	            (printout t "Aquest sha de eliminar" crlf)
+	            (printout t "Aquest s'ha de eliminar" crlf)
 	            (send ?assignatura delete)
 	        )
 	    )
@@ -1130,8 +1133,11 @@
 
 (defrule eliminar-assignatures-cursades 
 	(alumne-actual (nom-usuari ?nomUsuari))
-	?alumne <- (object (is-a Alumne)(nom-usuari ?nomUsuari))
+;	?alumne <- (object (is-a Alumne)(nom-usuari ?nomUsuari))
 	=>
+	(bind ?alumne (find-instance ((?alumneinst Alumne)) (eq (str-compare ?alumneinst:nom-usuari ?nomUsuari) 0)))
+	(bind ?alumne (nth$ 1 ?alumne))
+	
 	(bind ?expedient (send ?alumne get-expedient))
 	(bind $?convocatories (send ?expedient get-convocatories))
 	(progn$ 
