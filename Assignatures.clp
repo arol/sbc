@@ -882,6 +882,11 @@ Carreguem la ontologia
 
   )
 
-(defrule aconseguir-llista-assignatures-sense-prerequisit
-	
-	)
+(defrule eliminar-assignatures-sense-prerequisit-complert
+    (convocatoriesLlistades true)
+	?assignatura <- (object (is-a Assignatura))
+    =>
+    ($?prerequisits create$)
+    (bind $?prerequisits (send ?assignatura get-prerequisits))
+    
+)
