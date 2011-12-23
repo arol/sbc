@@ -1006,6 +1006,21 @@
 	)
 )
 
+(defrule ajustar-temes
+    ?u <- (alumne-actual (temes $?temes)) 
+    =>
+    (printout t ?temes crlf)
+    (progn$
+        (?tema ?temes) 
+        ;(printout t ?tema crlf)
+        (assert (li-interesa ?tema))
+    )
+)
+(defrule ajustar-perfil
+    ?u <- (alumne-actual (perfil ?perfil)) 
+    =>
+    (assert (li-interesa-perfil ?perfil))
+)
 ;(defrule aconseguir-llista-assignatures-sense-prerequisit
 	
 ;	)
