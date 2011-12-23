@@ -1,4 +1,4 @@
-; Fri Dec 23 17:43:43 CET 2011
+; Fri Dec 23 18:20:17 CET 2011
 ; 
 ;+ (version "3.4.7")
 ;+ (build "Build 620")
@@ -235,9 +235,7 @@
 	(nom "Projecte Enginyeria del Software i Bases de Dades")
 	(num-matriculats 200)
 	(percentatge-aprovats 90)
-	(prerequisits
-		[Assignatures_Class10020]
-		[Assignatures_Class10021])
+	(prerequisits [Assignatures_Class10020])
 	(projecte TRUE)
 	(sigles "PESBD")
 	(tema [Assignatures_Class1])
@@ -392,7 +390,6 @@
 	(nom "Projecte de Xarxes de Computadors")
 	(num-matriculats 170)
 	(percentatge-aprovats 98)
-	(prerequisits [Assignatures_Class20003])
 	(projecte TRUE)
 	(sigles "PXC")
 	(tema [Assignatures_Class20001])

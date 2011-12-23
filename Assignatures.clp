@@ -346,6 +346,11 @@
 	;+ (version "3.4.7")
 	;+ (build "Build 620")
 
+	; Fri Dec 23 18:11:25 CET 2011
+	; 
+	;+ (version "3.4.7")
+	;+ (build "Build 620")
+
 	([MAIN::Assignatures_Class0] of  Especialitzat
 
 		(afins
@@ -578,9 +583,7 @@
 		(nom "Projecte Enginyeria del Software i Bases de Dades")
 		(num-matriculats 200)
 		(percentatge-aprovats 90)
-		(prerequisits
-			[MAIN::Assignatures_Class10020]
-			[MAIN::Assignatures_Class10021])
+		(prerequisits [MAIN::Assignatures_Class10020])
 		(projecte TRUE)
 		(sigles "PESBD")
 		(tema [MAIN::Assignatures_Class1])
@@ -735,7 +738,6 @@
 		(nom "Projecte de Xarxes de Computadors")
 		(num-matriculats 170)
 		(percentatge-aprovats 98)
-		(prerequisits [MAIN::Assignatures_Class20003])
 		(projecte TRUE)
 		(sigles "PXC")
 		(tema [MAIN::Assignatures_Class20001])
@@ -862,8 +864,6 @@
 	([MAIN::Assignatures_Class9] of  Especialitzat
 
 		(nom-tema "Android"))
-
-
 
 )
 
@@ -1122,9 +1122,9 @@
 		(progn$ 
 	        (?prerequisit ?prerequisits)
 	        (if (not (member (send ?prerequisit get-nom) $?nomAssignaturesCursades)) then
-	            (printout t "No has fet ")
-	            (printout t (send ?prerequisit get-nom) crlf)
-	            (printout t "Aquest s'ha de eliminar" crlf)
+	            ;(printout t "No has fet ")
+	            ;(printout t (send ?prerequisit get-nom) crlf)
+	            ;(printout t "Aquest s'ha de eliminar" crlf)
 	            (send ?assignatura delete)
 	        )
 	    )
@@ -1132,6 +1132,7 @@
 )
 
 (defrule eliminar-assignatures-cursades 
+	(declare (salience 5))
 	(alumne-actual (nom-usuari ?nomUsuari))
 ;	?alumne <- (object (is-a Alumne)(nom-usuari ?nomUsuari))
 	=>
