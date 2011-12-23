@@ -884,7 +884,7 @@ Carreguem la ontologia
 	)
 
 (defrule eliminar-assignatures-cursades 
-  	(convocatoriesLlistades)
+ 	(convocatoriesLlistades true)
 	=>
 	;(printout t $?convocatories crlf )
 	;(bind ?MaxNumAssigs (pregunta "asodasjdajsdl"))
@@ -898,7 +898,13 @@ Carreguem la ontologia
     (convocatoriesLlistades true)
 	?assignatura <- (object (is-a Assignatura))
     =>
-    ($?prerequisits create$)
     (bind $?prerequisits (send ?assignatura get-prerequisits))
-    
+    (progn$ 
+        (?prerequisit ?prerequisits)
+        if ( not ( (member (send ?prerequisit get-nom) $?nomAssignaturesCursades))
+            (printout t "No has fet")
+            (printout t (send ?prerequisit get-nom) crlf)
+            (printout t "Aquest sha de eliminar" crlf)
+        )
+    )
 )
