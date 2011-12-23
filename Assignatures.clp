@@ -958,7 +958,7 @@
 )
 
 (defrule dificultat-assumible-baixa
-	?u <- (alumne-actual (dificultat-acceptable "facil"))
+	?u <- (alumne-actual (dificultat-acceptable "facilial"))
 	=>
 	(assert
 		(dificultat-assumible baixa))
@@ -1006,6 +1006,46 @@
 	)
 )
 
+(defrule calcul-volum-feina
+	?u <- (alumne-actual 
+			(num-assigs ?num-assigs)
+			(maxim-dedicacio ?maxim-dedicacio)
+			(maxim-laboratori ?maxim-laboratori)
+			)
+	=>
+	(printout t "Calculant Volum de feina" crlf)
+	(bind ?volum-feina 0)
+	
+	(if (< ?num-assigs 4) then
+		(bind ?volum-feina (- ?volum-feina 3))
+	else 	(if (> ?num-assigs 4) then
+				(bind ?volum-feina (+ ?volum-feina 3))
+			)
+	)
+	
+	(if (< ?maxim-dedicacio 15) then
+		(bind ?volum-feina (+ ?volum-feina 2))
+	else 	(if (> ?maxim-dedicacio 30) then
+				(bind ?volum-feina (- ?volum-feina 2))
+			)
+	)
+	
+	(if (< ?maxim-laboratori 3) then
+		(bind ?volum-feina (- ?volum-feina 3))
+	else 	(if (> ?maxim-laboratori 5) then
+				(bind ?volum-feina (+ ?volum-feina 3))
+			)
+	)
+
+	(if (< ?volum-feina -4) then
+		(assert (volum-feina baixa))
+	else (if (> ?volum-feina 2)  then
+			(assert (volum-feina alta))
+			else
+			(assert (volum-feina mitja))
+		)
+	)
+)
 ;(defrule aconseguir-llista-assignatures-sense-prerequisit
 	
 ;	)
