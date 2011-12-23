@@ -1053,35 +1053,35 @@
 			)
 	=>
 	(printout t "Calculant dificultat assumible" crlf)
-	(bind ?dificultad-assumible 0)
+	(bind ?dificultat-assumible 0)
 	
 	(if (< ?num-assigs 3) then
-		(bind ?dificultad-assumible (+ ?dificultad-assumible 2))
+		(bind ?dificultat-assumible (+ ?dificultat-assumible 2))
 	else 	(if (> ?num-assigs 4) then
-				(bind ?dificultad-assumible (- ?dificultad-assumible 2))
+				(bind ?dificultat-assumible (- ?dificultat-assumible 2))
 			)
 	)
 	
 	(if (< ?maxim-dedicacio 15) then
-		(bind ?dificultad-assumible (- ?dificultad-assumible 2))
+		(bind ?dificultat-assumible (- ?dificultat-assumible 2))
 	else 	(if (> ?maxim-dedicacio 30) then
-				(bind ?dificultad-assumible (+ ?dificultad-assumible 2))
+				(bind ?dificultat-assumible (+ ?dificultat-assumible 2))
 			)
 	)
 	
 	(if (< ?maxim-laboratori 3) then
-		(bind ?dificultad-assumible (+ ?dificultad-assumible 2))
+		(bind ?dificultat-assumible (+ ?dificultat-assumible 2))
 	else 	(if (> ?maxim-laboratori 5) then
-				(bind ?dificultad-assumible (- ?dificultad-assumible 2))
+				(bind ?dificultat-assumible (- ?dificultat-assumible 2))
 			)
 	)
 
-	(if (< ?dificultad-assumible -2) then
-		(assert (dificultad-assumible baixa))
-	else (if (and (> ?dificultad-assumible 2) (not (eq (str-compare ?dificultatAcceptable "mitjana") 0))) then
-			(assert (dificultad-assumible alta))
+	(if (< ?dificultat-assumible -2) then
+		(assert (dificultat-assumible baixa))
+	else (if (and (> ?dificultat-assumible 2) (not (eq (str-compare ?dificultatAcceptable "mitjana") 0))) then
+			(assert (dificultat-assumible alta))
 			else
-			(assert (dificultad-assumible mitja))
+			(assert (dificultat-assumible mitja))
 		)
 	)
 )
@@ -1191,20 +1191,33 @@
 (defrule inizialitzar-recomanacions
 	?assignatura <- (object (is-a Assignatura))
 	=>
-	(assert
-		(nom (send ?assignatura get-nom))
-		(sigles (send ?assignatura get-sigles))
-		(punts 0)
+	(assert 
+		(recomanacio
+			(nom (send ?assignatura get-nom))
+			(sigles (send ?assignatura get-sigles))
+			(punts 0)
 		)
+	)
 )
 
 (defrule asociar-temes
     (li-interesa ?tema)
 	?assignatura <- (object (is-a Assignatura)(nom ?nom))
 	?recomanacio <- (recomanacio (nom ?nom) (punts ?punts))
+    (not (visitat asociar-temes ?nom))
 	=>
-    (printout t ?punts crlf)
     (if (eq (str-compare (lowcase ?tema) (lowcase (send(send ?assignatura get-tema) get-nom-tema) ))0) then
-     (printout t ?punts crlf)
+        (modify ?recomanacio (punts (+ ?punts 1)))
+        (assert (visitat asociar-temes ?nom))
     )
+)
+
+(defrule asociar-dificultat-assumible
+	(dificultat-assumible mitja)
+	?assignatura <- (object (is-a Assignatura) (nom ?nom) (dificultat ?dificultat&mitja|baixa))
+	?recomanacio <- (recomanacio (nom ?nom)(punts ?punts))
+	(not (visitat dificultat-assumible ?nom))
+	=>
+	(modify ?recomanacio (punts (+ ?punts 2)))
+	(assert (visitat dificultat-assumible ?nom))
 )
