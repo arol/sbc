@@ -1104,7 +1104,6 @@
     (bind $?temes (send ?perfilObj get-temes))
     (progn$
         (?tema ?temes) 
-        (printout t "entro" crlf)
         (assert (li-interesa (send ?tema get-nom-tema)))
     )
 )
@@ -1186,7 +1185,7 @@
     (slot nom (type STRING))
 	(slot sigles (type STRING))
     (slot punts (type INTEGER))
-	(slot volum-feina (type SYMBOL)(allowed-symbols alt mitja baix no-calculat))
+	(slot volum-feina (type SYMBOL)(allowed-symbols gran alt mitja baix no-calculat))
 )
 
 (defrule inizialitzar-recomanacions
@@ -1245,12 +1244,13 @@
 	(assert (visitat dificultat-assumible ?nom))
 )
 
-(defrule calcular-volum-feina
+(defrule calcular-volum-feina-assignatura
+	(declare (salience 10))
 	?recomanacio <- (recomanacio (nom ?nom)(volum-feina no-calculat))
 	?assignatura <- (object (is-a Assignatura) (nom ?nom) 
 						(hores-teoria ?horesteo) (hores-laboratori ?horeslab) (projecte ?proj) )
+	(not (visitat calcular-volum-feina-assignatura ?nom))
 	=>
-	(modify ?recomanacio (volum-feina baix))
 	
 	(bind ?volum-feina 0)
 	(if (> ?horeslab 15) then
@@ -1271,12 +1271,20 @@
 		(bind ?volum-feina (+ ?volum-feina 10 ))
 	)
 	
+	(printout t ?nom " - " ?volum-feina crlf)
+	
 	(if (> ?volum-feina 10) then
 		(modify ?recomanacio (volum-feina alt))
-	else (if (> ?volum-feina 6) then
+	else (
+		if (> ?volum-feina 6) then
 			(modify ?recomanacio (volum-feina mitja))
+		else 
+			(modify ?recomanacio (volum-feina baix))
+				 
 		)
 	)
+	
+	(assert (visitat calcular-volum-feina-assignatura ?nom))
 )
 
 (defrule associar-volum-feina-alt
@@ -1308,9 +1316,11 @@
 	(assert (visitat associacio-volum-feina ?nom))
 )
 
-
-
-
+(defrule a-refinament
+	(declare (salience -1))
+	=>
+	(focus refinament)
+)
 
 
 
