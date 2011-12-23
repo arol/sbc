@@ -1182,6 +1182,22 @@
     (import inferencia ?ALL)
 )
 
+(deftemplate recomanacio "Estructura per guardar les assignatures no refinades"
+    (slot nom (type STRING))
+	(slot sigles (type STRING))
+    (slot punts (type INTEGER))
+)
+
+(defrule inizialitzar-recomanacions
+	?assignatura <- (object (is-a Assignatura))
+	=>
+	(assert
+		(nom (send ?assignatura get-nom))
+		(sigles (send ?assignatura get-sigles))
+		(punts 0)
+		)
+)
+
 (defrule asociar-temes
     (li-interesa ?perfil)
 	=>
@@ -1190,4 +1206,3 @@
        TRUE
     )
 )
-
